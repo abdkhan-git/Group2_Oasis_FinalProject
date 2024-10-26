@@ -16,5 +16,17 @@ fun navHost() {
         composable(route = "MainMenuScreen") {
             mainmenuscreen(navController)
         }//End of composable
+        composable(route = "RegistrationScreen") {
+            registrationscreen(navController)
+        }//End of composable
+        composable(route = "StudentRecordsScreen") {
+            studentrecordsscreen(navController)
+        }//End of composable
+        composable(route = "PersonalInformationScreen") {
+            personalinformationscreen(navController)
+        }//End of composable
+        composable(route = "FinancialInformationScreen") {
+            financialinformationscreen(navController)
+        }//End of composable
     }//End of Navhost
 }
