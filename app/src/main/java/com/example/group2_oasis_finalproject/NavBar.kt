@@ -64,7 +64,7 @@ fun navBar() {
         MyNavItem(title = "Registration", iconSelected = Icons.Filled.Face, iconUnselected = Icons.Outlined.Face, route = "RegistrationScreen"),
         MyNavItem(title = "Student Records", iconSelected = Icons.Filled.Edit, iconUnselected = Icons.Outlined.Edit, route = "StudentRecordsScreen"),
         MyNavItem(title = "Personal Information", iconSelected = Icons.Filled.AccountBox, iconUnselected = Icons.Outlined.AccountBox, route = "PersonalInformationScreen"),
-        MyNavItem(title = "financial Information", iconSelected = Icons.Filled.Info, iconUnselected = Icons.Outlined.Info, route = "FinancialInformationScreen"),
+        MyNavItem(title = "Financial Information", iconSelected = Icons.Filled.Info, iconUnselected = Icons.Outlined.Info, route = "FinancialInformationScreen"),
     )
     var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
     var shownavbar by rememberSaveable { mutableStateOf(false) }
