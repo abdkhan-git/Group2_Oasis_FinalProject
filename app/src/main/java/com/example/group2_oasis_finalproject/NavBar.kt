@@ -142,6 +142,7 @@ fun navBar() {
                 composable(route = "MainMenuScreen") {
                     Screentitle = "Main Menu"
                     shownavbar = true
+                    selectedItemIndex = 0
                     mainmenuscreen(navController)
                 }//End of composable
                 composable(route = "signUpScreen") {
@@ -149,18 +150,22 @@ fun navBar() {
                 }//End of composable
                 composable(route = "RegistrationScreen") {
                     Screentitle = "Registration"
+                    selectedItemIndex = 1
                     registrationscreen(navController)
                 }//End of composable
                 composable(route = "StudentRecordsScreen") {
                     Screentitle = "Student Records"
+                    selectedItemIndex = 2
                     studentrecordsscreen(navController)
                 }//End of composable
                 composable(route = "PersonalInformationScreen") {
                     Screentitle = "Personal Information"
+                    selectedItemIndex = 3
                     personalinformationscreen(navController)
                 }//End of composable
                 composable(route = "FinancialInformationScreen") {
                     Screentitle = "Financial Information"
+                    selectedItemIndex = 4
                     financialinformationscreen(navController)
                 }//End of composable
             }//End of Navhost
