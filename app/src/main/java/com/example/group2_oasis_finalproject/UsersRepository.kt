@@ -24,7 +24,7 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
     fun getUsers() = userDao.getUsers()
 
     fun addUser(user: User) {
-        if (user.RamID.trim() != "") { CoroutineScope(Dispatchers.IO).launch { user.RamID = userDao.addUser(user) } }
+        if (user.RamID.trim() != "") { CoroutineScope(Dispatchers.IO).launch { user.RamID = userDao.addUser(user).toString() } }
     }
 
     fun deleteSubject(user: User) {

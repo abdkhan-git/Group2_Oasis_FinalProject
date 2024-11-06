@@ -17,7 +17,7 @@ interface UserDao {
     fun getUsers(): Flow<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addUser(user : User): String
+    fun addUser(user : User)
 
     @Update
     fun updateSubject(user: User)
