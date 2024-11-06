@@ -82,6 +82,9 @@ fun navBar() {
                     shownavbar = true
                     mainmenuscreen(navController)
                 }//End of composable
+                composable(route = "signUpScreen") {
+                    signUpScreen(navController)
+                }//End of composable
                 composable(route = "RegistrationScreen") {
                     registrationscreen(navController)
                 }//End of composable

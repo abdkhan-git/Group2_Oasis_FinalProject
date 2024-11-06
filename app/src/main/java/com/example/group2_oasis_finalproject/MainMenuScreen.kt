@@ -1,6 +1,7 @@
 package com.example.group2_oasis_finalproject
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -35,5 +37,8 @@ import androidx.navigation.compose.rememberNavController
 fun mainmenuscreen(navController: NavController) {
     Column {
         Text(text = "Welcome to the Main Menu Screen")
+        val count = remember { mutableStateOf(0) }
+// content that you want to make clickable
+        Text(text = count.value.toString(), modifier = Modifier.clickable { count.value += 1 })
     }
 }
