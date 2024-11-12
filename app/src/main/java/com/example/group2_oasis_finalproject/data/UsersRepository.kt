@@ -1,4 +1,4 @@
-package com.example.group2_oasis_finalproject
+package com.example.group2_oasis_finalproject.data
 
 import android.content.Context
 import androidx.room.Room
