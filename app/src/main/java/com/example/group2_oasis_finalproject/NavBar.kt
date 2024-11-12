@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.outlined.AccountBox
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
@@ -29,12 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.group2_oasis_finalproject.view.financialinformationscreen
-import com.example.group2_oasis_finalproject.view.mainmenuscreen
-import com.example.group2_oasis_finalproject.view.personalinformationscreen
-import com.example.group2_oasis_finalproject.view.registrationscreen
-import com.example.group2_oasis_finalproject.view.signinscreen
-import com.example.group2_oasis_finalproject.view.studentrecordsscreen
 
 @Composable
 fun navBar() {

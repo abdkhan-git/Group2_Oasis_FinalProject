@@ -1,7 +1,7 @@
 package com.example.group2_oasis_finalproject
 
 import android.app.Application
-import com.example.group2_oasis_finalproject.data.UsersRepository
+import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MyApplication : Application() {

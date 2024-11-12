@@ -1,4 +1,4 @@
-package com.example.group2_oasis_finalproject.data
+package com.example.group2_oasis_finalproject
 
 import androidx.room.Dao
 import androidx.room.Delete

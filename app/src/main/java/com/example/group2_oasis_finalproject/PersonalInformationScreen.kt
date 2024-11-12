@@ -1,4 +1,4 @@
-package com.example.group2_oasis_finalproject.view
+package com.example.group2_oasis_finalproject
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

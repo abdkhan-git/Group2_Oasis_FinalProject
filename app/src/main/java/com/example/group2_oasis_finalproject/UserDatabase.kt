@@ -1,4 +1,4 @@
-package com.example.group2_oasis_finalproject.data
+package com.example.group2_oasis_finalproject
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
