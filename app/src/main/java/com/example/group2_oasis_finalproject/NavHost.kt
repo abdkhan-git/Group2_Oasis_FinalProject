@@ -15,6 +15,9 @@ fun navHost() {
         composable(route = "SignInScreen") {
             signinscreen(navController)
         }//End of composable
+        composable(route = "signUpScreen") {
+            signUpScreen(navController)
+        }//End of composable
         composable(route = "MainMenuScreen") {
             mainmenuscreen(navController)
         }//End of composable

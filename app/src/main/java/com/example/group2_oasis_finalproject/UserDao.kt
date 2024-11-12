@@ -13,6 +13,12 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE RamID = :RamID")
     fun getUser(RamID: String): Flow<User?>
 
+    @Query("SELECT RamID FROM User WHERE RamID = :RamID")
+    fun getUserID(RamID: String): String
+
+    @Query("SELECT Pin FROM User WHERE RamID = :RamID")
+    fun getUserPin(RamID: String): String
+
     @Query("SELECT * FROM User ORDER BY RamID COLLATE NOCASE")
     fun getUsers(): Flow<List<User>>
 

@@ -23,6 +23,10 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     fun getUsers() = userDao.getUsers()
 
+    fun getUserRamID(RamID: String) = CoroutineScope(Dispatchers.IO).launch {userDao.getUserID(RamID)}
+
+    fun getUserPin(RamID: String) = CoroutineScope(Dispatchers.IO).launch {userDao.getUserPin(RamID)}
+
     fun addUser(user: User) {
         if (user.RamID.trim() != "") { CoroutineScope(Dispatchers.IO).launch { user.RamID = userDao.addUser(user).toString() } }
     }
@@ -31,12 +35,12 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
         CoroutineScope(Dispatchers.IO).launch { userDao.deleteSubject(user) }
     }
 
-    fun getAllSales() : Flow<List<User>> {
-        val queryFlow : Flow<List<User>> = firestoreDb.collection("Hwk4SalesCopy").dataObjects<User>()
+    fun getAllUsers() : Flow<List<User>> {
+        val queryFlow : Flow<List<User>> = firestoreDb.collection("OasisUsers").dataObjects<User>()
         return queryFlow
     }
 
-    fun addSale(user : User) {
+    fun addUserFB(user : User) {
         firestoreDb.collection("OasisUsers").add(user)
     }
 
