@@ -3,11 +3,15 @@ package com.example.group2_oasis_finalproject
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -55,20 +59,26 @@ fun signinscreen(navController: NavController) {
             withLink(LinkAnnotation.Url("https://oasis.farmingdale.edu/genhelp/termsofusage.htm", TextLinkStyles(style = SpanStyle(color = Color.Blue)))) { append("Department Contact.") }
             })
         Spacer(Modifier.padding(20.dp))
-        TextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it}, label = {Text(text = "Ram ID")})
-        TextField(value = UserPintext, onValueChange = {UserPintext = it}, label = {Text(text = "Six-Digit Login PIN")})
-        Button(onClick = {
-            CoroutineScope(Dispatchers.IO).launch {
-                if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
-                else {PassedInspection = false}
-            }
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(2000)
-                if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
-                else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
-            }
-        }) { Text(text = "Login")}
-        Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
+        OutlinedTextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it}, label = {Text(text = "Ram ID")})
+        Spacer(Modifier.padding(20.dp))
+        OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it}, label = {Text(text = "Six-Digit Login PIN")})
+        Spacer(Modifier.padding(20.dp))
+        Row{
+            OutlinedButton(onClick = {
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
+                    else {PassedInspection = false}
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(2000)
+                    if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
+                    else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
+                }
+            }) { Text(text = "Login")}
+            Spacer(Modifier.padding(20.dp))
+            Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
+        }
+
     }
     Column(Modifier.fillMaxWidth().fillMaxSize(), Arrangement.Bottom, Alignment.CenterHorizontally) {
         Text(text = "Please call the Registrar's Office at (934) 420-2776 during business hours (Monday - Friday 9:00am - 4:30pm) if you have difficulty logging in. ")
