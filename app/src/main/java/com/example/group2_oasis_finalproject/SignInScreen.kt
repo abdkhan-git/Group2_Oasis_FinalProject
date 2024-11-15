@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -61,10 +62,11 @@ fun signinscreen(navController: NavController) {
                 if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
                 else {PassedInspection = false}
             }
-            if (PassedInspection == true) {
-                navController.navigate("MainMenuScreen")
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(2000)
+                if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
+                else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
             }
-            else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
         }) { Text(text = "Login")}
         Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
     }
