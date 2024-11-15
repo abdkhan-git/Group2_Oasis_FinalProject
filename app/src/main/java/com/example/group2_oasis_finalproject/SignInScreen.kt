@@ -61,9 +61,7 @@ fun signinscreen(navController: NavController) {
                 if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
                 else {PassedInspection = false}
             }
-            if (PassedInspection == true) {
-                navController.navigate("MainMenuScreen")
-            }
+            if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
             else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
         }) { Text(text = "Login")}
         Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
