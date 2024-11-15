@@ -57,14 +57,14 @@ fun signinscreen(navController: NavController) {
         TextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it}, label = {Text(text = "Ram ID")})
         TextField(value = UserPintext, onValueChange = {UserPintext = it}, label = {Text(text = "Six-Digit Login PIN")})
         Button(onClick = {
-//            CoroutineScope(Dispatchers.IO).launch {
-//                if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
-//                else {PassedInspection = false}
-//            }
-//            if (PassedInspection == true) {
+            CoroutineScope(Dispatchers.IO).launch {
+                if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
+                else {PassedInspection = false}
+            }
+            if (PassedInspection == true) {
                 navController.navigate("MainMenuScreen")
-            //}
-            //else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
+            }
+            else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
         }) { Text(text = "Login")}
         Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
     }
