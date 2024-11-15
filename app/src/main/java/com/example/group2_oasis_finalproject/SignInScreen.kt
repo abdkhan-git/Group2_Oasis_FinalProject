@@ -76,7 +76,7 @@ fun signinscreen(navController: NavController) {
                 }
             }) { Text(text = "Login")}
             Spacer(Modifier.padding(20.dp))
-            OutlinedButton(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
+            Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
         }
 
     }
