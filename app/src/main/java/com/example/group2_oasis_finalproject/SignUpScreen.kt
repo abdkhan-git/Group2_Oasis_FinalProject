@@ -19,6 +19,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun signUpScreen(navController: NavController) {
@@ -72,14 +76,21 @@ fun signUpScreen(navController: NavController) {
                     Toast.makeText(Context, "Please start your Ram ID with a R", Toast.LENGTH_LONG).show()
                     Break
                 } else {
-                    try {
-                        val newUser = User(Emailtext, Firsttext, Lasttext, Pintext, RamIDtext)
-                        SignupscreenViewModel.userRepository.addUser(newUser)
-                        SignupscreenViewModel.userRepository.addUserFB(newUser)
-                    } catch (e : IllegalArgumentException) {
-                        Break
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            val newUser = User(Emailtext, Firsttext, Lasttext, Pintext, RamIDtext)
+                            SignupscreenViewModel.userRepository.addUser(newUser)
+                            SignupscreenViewModel.userRepository.addUserFB(newUser)
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(Context, "User successfully signed up!", Toast.LENGTH_LONG).show()
+                                navController.popBackStack()
+                            }
+                        } catch (e: IllegalArgumentException) {
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(Context, "An error occurred: ${e.message}", Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
-                    navController.popBackStack()
                 }
             }) { Text(text = "Sign up") }
         }
