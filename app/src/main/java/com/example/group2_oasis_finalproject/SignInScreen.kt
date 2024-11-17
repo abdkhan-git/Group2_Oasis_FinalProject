@@ -36,6 +36,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -66,13 +67,12 @@ fun signinscreen(navController: NavController) {
         Row{
             OutlinedButton(onClick = {
                 CoroutineScope(Dispatchers.IO).launch {
-                    if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true}
-                    else {PassedInspection = false}
-                }
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(2000)
-                    if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
-                    else {Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
+                    if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true }
+                    else { PassedInspection = false }
+                    withContext(Dispatchers.Main) {
+                        if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
+                        else { Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
+                    }
                 }
             }) { Text(text = "Login")}
             Spacer(Modifier.padding(20.dp))
