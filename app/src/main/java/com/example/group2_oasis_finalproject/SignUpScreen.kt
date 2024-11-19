@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -16,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key.Companion.Break
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
@@ -40,13 +42,13 @@ fun signUpScreen(navController: NavController) {
     Column(Modifier.padding(50.dp)) {
         SignupscreenViewModel.HeaderText(X = "Create an Account!")
         Spacer(modifier = Modifier.padding(20.dp))
-        OutlinedTextField(value = Emailtext, onValueChange = { Emailtext = it }, label = { Text(text = "Email") })
+        OutlinedTextField(value = Emailtext, onValueChange = { Emailtext = it }, label = { Text(text = "Email") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
         Spacer(modifier = Modifier.padding(20.dp))
         OutlinedTextField(value = Firsttext, onValueChange = { Firsttext = it }, label = { Text(text = "First Name") })
         Spacer(modifier = Modifier.padding(20.dp))
         OutlinedTextField(value = Lasttext, onValueChange = { Lasttext = it }, label = { Text(text = "Last Name") })
         Spacer(modifier = Modifier.padding(10.dp))
-        OutlinedTextField(value = Pintext, onValueChange = { Pintext = it }, label = { Text(text = "Pin (6 Digits)") })
+        OutlinedTextField(value = Pintext, onValueChange = { Pintext = it }, label = { Text(text = "Pin (6 Digits)") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
         Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(value = RamIDtext, onValueChange = { RamIDtext = it }, label = { Text(text = "Ram ID (8 Digits)") })
         Spacer(modifier = Modifier.padding(10.dp))

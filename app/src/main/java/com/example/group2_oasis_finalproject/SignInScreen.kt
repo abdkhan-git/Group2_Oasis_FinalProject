@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -27,6 +30,7 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,6 +39,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -47,6 +52,7 @@ fun signinscreen(navController: NavController) {
     var viewModel = viewModel {SignInScreenViewModel()}
     val Context = LocalContext.current
     var PassedInspection : Boolean = false
+    var CoroutineScopeRunning = false
 
 
     Column(Modifier.fillMaxWidth(), Arrangement.Bottom, Alignment.CenterHorizontally) {
@@ -62,26 +68,27 @@ fun signinscreen(navController: NavController) {
         Spacer(Modifier.padding(20.dp))
         OutlinedTextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it}, label = {Text(text = "Ram ID")})
         Spacer(Modifier.padding(20.dp))
-        OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it}, label = {Text(text = "Six-Digit Login PIN")})
+        OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it}, label = {Text(text = "Six-Digit Login PIN")}, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
         Spacer(Modifier.padding(20.dp))
         Row{
             OutlinedButton(onClick = {
                 CoroutineScope(Dispatchers.IO).launch {
+                    CoroutineScopeRunning = true
                     if (viewModel.CheckLogin(UserRamIDtext, UserPintext) == true) { PassedInspection = true }
                     else { PassedInspection = false }
                     withContext(Dispatchers.Main) {
-                        if (PassedInspection == true) { navController.navigate("MainMenuScreen") }
-                        else { Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
+                        if (PassedInspection == true) {  CoroutineScopeRunning = false; navController.navigate("MainMenuScreen") }
+                        else {  CoroutineScopeRunning = false; Toast.makeText(Context, "Login Failed", Toast.LENGTH_LONG).show() }
                     }
                 }
             }) { Text(text = "Login")}
             Spacer(Modifier.padding(20.dp))
             Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
         }
-
     }
     Column(Modifier.fillMaxWidth().fillMaxSize(), Arrangement.Bottom, Alignment.CenterHorizontally) {
         Text(text = "Please call the Registrar's Office at (934) 420-2776 during business hours (Monday - Friday 9:00am - 4:30pm) if you have difficulty logging in. ")
         Spacer(Modifier.padding(20.dp))
+        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxWidth())}
     }
 }
