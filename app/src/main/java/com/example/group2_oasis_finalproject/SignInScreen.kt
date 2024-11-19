@@ -85,11 +85,10 @@ fun signinscreen(navController: NavController) {
             Spacer(Modifier.padding(20.dp))
             Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
         }
-        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxWidth())}
-
     }
     Column(Modifier.fillMaxWidth().fillMaxSize(), Arrangement.Bottom, Alignment.CenterHorizontally) {
         Text(text = "Please call the Registrar's Office at (934) 420-2776 during business hours (Monday - Friday 9:00am - 4:30pm) if you have difficulty logging in. ")
         Spacer(Modifier.padding(20.dp))
+        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxWidth())}
     }
 }
