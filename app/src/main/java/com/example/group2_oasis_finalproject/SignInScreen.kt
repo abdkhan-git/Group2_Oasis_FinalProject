@@ -12,6 +12,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -51,7 +52,7 @@ fun signinscreen(navController: NavController) {
     var viewModel = viewModel {SignInScreenViewModel()}
     val Context = LocalContext.current
     var PassedInspection : Boolean = false
-    var CoroutineScopeRunning = true
+    var CoroutineScopeRunning = false
 
 
     Column(Modifier.fillMaxWidth(), Arrangement.Bottom, Alignment.CenterHorizontally) {
@@ -84,7 +85,7 @@ fun signinscreen(navController: NavController) {
             Spacer(Modifier.padding(20.dp))
             Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
         }
-        if (CoroutineScopeRunning == true) { CircularProgressIndicator(Modifier.fillMaxSize())}
+        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxSize())}
 
     }
     Column(Modifier.fillMaxWidth().fillMaxSize(), Arrangement.Bottom, Alignment.CenterHorizontally) {
