@@ -85,7 +85,7 @@ fun signinscreen(navController: NavController) {
             Spacer(Modifier.padding(20.dp))
             Button(onClick = { navController.navigate("signUpScreen") }) { Text(text = "Register")}
         }
-        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxSize())}
+        if (CoroutineScopeRunning == true) { LinearProgressIndicator(Modifier.fillMaxWidth())}
 
     }
     Column(Modifier.fillMaxWidth().fillMaxSize(), Arrangement.Bottom, Alignment.CenterHorizontally) {
