@@ -1,161 +1,87 @@
 package com.example.group2_oasis_finalproject
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-/**
- * Main menu screen displaying various options for students,
- * such as registration, bill payment, student records, personal info, etc.
- *
- * @param navController Used to navigate to other screens in the application
- */
 @Composable
 fun mainmenuscreen(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()) // Enable vertical scrolling for the menu
-    ) {
-        // Graduation Candidates Section
-        Text(
-            text = "CANDIDATES FOR GRADUATION",
-            style = TextStyle(
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Red
-            ),
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        // Description for graduation candidates
-        Text(
-            text = "Students intending to graduate in Fall 2024 or Winter 2025 should review the following lists:",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        // Fall 2024 Graduation List (Clickable)
-        Text(
-            text = "Candidates for Graduation - Fall 2024 list",
-            style = TextStyle(
-                color = Color.Blue,
-                textDecoration = TextDecoration.Underline
-            ),
-            modifier = Modifier
-                .clickable { /* Handle click for navigation or action */ }
-                .padding(bottom = 4.dp)
-        )
-
-        // Winter 2025 Graduation List (Clickable)
-        Text(
-            text = "Candidates for Graduation - Winter 2025 list",
-            style = TextStyle(
-                color = Color.Blue,
-                textDecoration = TextDecoration.Underline
-            ),
-            modifier = Modifier
-                .clickable { /* Handle click for navigation or action */ }
-                .padding(bottom = 16.dp)
-        )
-
-        // Registration menu option with a brief description and navigation on click
-        MenuSection(
-            title = "Registration",
-            description = "Check your registration status; Add or Drop Classes; Display your class schedule",
-            onClick = { navController.navigate("RegistrationScreen") }
-        )
-
-        // Bill payment menu option; navigation not included
-        MenuSection(
-            title = "Pay Your Bill",
-            description = "Access the Student Account Payment/Billing Center, to view your bill and pay online using MasterCard, Visa, Discover or Amex.\nNOTE: Admissions applicants should NOT use this link to pay their advance tuition deposit",
-            onClick = { /* Handle click for action */ }
-        )
-
-        // Student records section with navigation
-        MenuSection(
-            title = "Student Records",
-            description = "Order official transcripts online; Display your grades and transcript; View your holds (restrictions); Review charges and payments; View general student record information and Ram ID",
-            onClick = { navController.navigate("StudentRecordsScreen") }
-        )
-
-        // Personal information section with navigation
-        MenuSection(
-            title = "Personal Information",
-            description = "View your address(es) and phone number(s), Update your emergency contact information, marital status; Change your OASIS Login PIN and Security Question; Register your personal contact information with NY-ALERT to receive E-Mail, Voice and Text Messaging Alerts during Campus Emergencies",
-            onClick = { navController.navigate("PersonalInformationScreen") }
-        )
-
-        // Financial aid information with navigation
-        MenuSection(
-            title = "Financial Aid",
-            description = "Review the status of your financial aid application; Check the status of your document requirements; Review your loans",
-            onClick = { navController.navigate("FinancialInformationScreen") }
-        )
-
-        // Parking and traffic violation management, with placeholder for navigation
-        MenuSection(
-            title = "Parking Decals & Traffic Violations",
-            description = "Purchase campus parking decals, pay parking citations and/or request a traffic citation hearing",
-            onClick = { /* Handle click for action */ }
-        )
-    }
-}
-
-/**
- * MenuSection composable function to display individual menu options as clickable cards.
- *
- * @param title The title of the menu section
- * @param description A brief description of what the section contains or allows the user to do
- * @param onClick A lambda function executed when the section is clicked, typically for navigation
- */
-@Composable
-private fun MenuSection(
-    title: String,
-    description: String,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
+    
+    LazyColumn {
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .clickable(onClick = onClick), // Handle card click for navigation or action
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp) // Set card elevation for shadow effect
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp) // Padding inside the card for spacing
-        ) {
-            // Display the title of the section in bold with a distinct color
-            Text(
-                text = title,
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF4B0082)  // Dark Purple color
-                ),
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-
-            // Description text for the menu option
-            Text(
-                text = description,
-                style = TextStyle(fontSize = 14.sp)
-            )
-        }
+            .padding(10.dp)
+            .fillMaxSize() ,onClick = { navController.navigate("RegistrationScreen") })
+        {
+            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+                    Text(text = "Registration Screen",lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Check your registration status", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Add or Drop Classes", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Display your class schedule", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                }
+                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+            } }}
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .fillMaxSize() ,onClick = { navController.navigate("StudentRecordsScreen") })
+        {
+            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+                    Text(text = "Student Records",lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Order offical transcripts online", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Display your grades and transcript", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "View your holds (restrictions)", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                }
+                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+            }}}
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .fillMaxSize() ,onClick = { navController.navigate("PersonalInformationScreen") })
+        {
+            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+                    Text(text = "Personal Information", lineHeight = TextUnit(2f, TextUnitType.Em),fontWeight = FontWeight.Bold)
+                    Text(text = "View your personal information", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "change your OASIS login PIN and Security Question", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Read information regarding changing your name.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                }
+                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+            }}}
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .fillMaxSize(),onClick = { navController.navigate("FinancialInformationScreen") })
+        {
+            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+                    Text(text = "Financial information", fontWeight = FontWeight.Bold, lineHeight = TextUnit(2f, TextUnitType.Em))
+                    Text(text = "Review the status of your financial aid application", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Check the status of your document requirements", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Review your loans", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                }
+                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+            }}}
     }
 }

@@ -7,14 +7,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 class SignInScreenViewModel(val usersRepository: UsersRepository = MyApplication.UsersRepository) : ViewModel() {
 
     suspend fun CheckLogin(RamID : String, Pin : String) : Boolean {
-        var Loggedin = viewModelScope.async {
-                if (usersRepository.getUserRamID(RamID).toString() == "RamID") {
-                    if (usersRepository.getUserPin(RamID).toString() == Pin) {
+        var Loggedin = CoroutineScope(Dispatchers.IO).async {
+            val UserRamIDCheck = usersRepository.getUserRamID(RamID)
+            val UserPinCheck = usersRepository.getUserPin(RamID)
+            if ( UserRamIDCheck == RamID) {
+                    if (UserPinCheck == Pin) {
                         true
                     }
                     else false

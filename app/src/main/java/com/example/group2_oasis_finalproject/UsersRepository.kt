@@ -23,17 +23,13 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     fun getUsers() = userDao.getUsers()
 
-    fun getUserRamID(RamID: String) = CoroutineScope(Dispatchers.IO).launch {userDao.getUserID(RamID)}
+    fun getUserRamID(RamID: String) = userDao.getUserID(RamID)
 
-    fun getUserPin(RamID: String) = CoroutineScope(Dispatchers.IO).launch {userDao.getUserPin(RamID)}
+    fun getUserPin(RamID: String) = userDao.getUserPin(RamID)
 
-    fun addUser(user: User) {
-        if (user.RamID.trim() != "") { CoroutineScope(Dispatchers.IO).launch { user.RamID = userDao.addUser(user).toString() } }
-    }
+    fun addUser(user: User) { if (user.RamID.trim() != "") { user.RamID = userDao.addUser(user).toString() } }
 
-    fun deleteSubject(user: User) {
-        CoroutineScope(Dispatchers.IO).launch { userDao.deleteSubject(user) }
-    }
+    fun deleteSubject(user: User) { userDao.deleteSubject(user) }
 
     fun getAllUsers() : Flow<List<User>> {
         val queryFlow : Flow<List<User>> = firestoreDb.collection("OasisUsers").dataObjects<User>()
