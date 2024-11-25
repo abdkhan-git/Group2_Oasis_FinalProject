@@ -1,87 +1,171 @@
 package com.example.group2_oasis_finalproject
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun mainmenuscreen(navController: NavController) {
-    
-    LazyColumn {
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize() ,onClick = { navController.navigate("RegistrationScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Registration Screen",lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "Check your registration status", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Add or Drop Classes", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Display your class schedule", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+    val context = LocalContext.current
+    val viewModel: MainMenuScreenViewModel = viewModel()
+    val currentUser by viewModel.currentUser.collectAsState()
+    val currentTime = remember {
+        SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.US).format(Date())
+    }
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        // Welcome Header
+        item {
+            Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                currentUser?.let {
+                    Text(
+                        text = "Welcome, ${it.First} ${it.Last}",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-            } }}
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize() ,onClick = { navController.navigate("StudentRecordsScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Student Records",lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "Order offical transcripts online", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Display your grades and transcript", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "View your holds (restrictions)", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                Text(
+                    text = "Last access on $currentTime",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray
+                )
+            }
+        }
+
+        // Graduation Section
+        item {
+            Column(modifier = Modifier.padding(vertical = 16.dp)) {
+                Text(
+                    text = "CANDIDATES FOR GRADUATION",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Students intending to graduate in Fall 2024 or Winter 2025 should review the following lists:",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                Text(
+                    text = "Candidates for Graduation - Fall 2024 list",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .clickable { /* Handle click */ }
+                        .padding(vertical = 4.dp)
+                )
+                Text(
+                    text = "Candidates for Graduation - Winter 2025 list",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .clickable { /* Handle click */ }
+                        .padding(vertical = 4.dp)
+                )
+            }
+        }
+
+        // Main Menu Items
+        item {
+            MenuSection(
+                title = "Registration",
+                description = "Check your registration status; Add or Drop Classes; Display your class schedule",
+                onClick = { navController.navigate("RegistrationScreen") }
+            )
+        }
+
+        item {
+            MenuSection(
+                title = "Pay Your Bill",
+                description = "Access the Student Account Payment/Billing Center, to view your bill and pay online using MasterCard, Visa, Discover or Amex.",
+                onClick = {
+                    val webpage = Uri.parse("https://epay.farmingdale.edu/C21458_tsa/web/login.jsp")
+                    val intent = Intent(Intent.ACTION_VIEW, webpage)
+                    context.startActivity(intent)
                 }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-            }}}
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+            )
+        }
+
+        item {
+            MenuSection(
+                title = "Student Records",
+                description = "Order official transcripts online; Display your grades and transcript; View your holds",
+                onClick = { navController.navigate("StudentRecordsScreen") }
+            )
+        }
+
+        item {
+            MenuSection(
+                title = "Personal Information",
+                description = "View your address(es) and phone number(s); Update your emergency contact information",
+                onClick = { navController.navigate("PersonalInformationScreen") }
+            )
+        }
+
+        item {
+            MenuSection(
+                title = "Financial Aid",
+                description = "Review the status of your financial aid application; Check document requirements",
+                onClick = { navController.navigate("FinancialInformationScreen") }
+            )
+        }
+
+        item {
+            MenuSection(
+                title = "Parking Decals & Traffic Violations",
+                description = "Purchase campus parking decals, pay parking citations",
+                onClick = { /* Handle click */ }
+            )
+        }
+    }
+}
+
+@Composable
+private fun MenuSection(
+    title: String,
+    description: String,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize() ,onClick = { navController.navigate("PersonalInformationScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Personal Information", lineHeight = TextUnit(2f, TextUnitType.Em),fontWeight = FontWeight.Bold)
-                    Text(text = "View your personal information", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "change your OASIS login PIN and Security Question", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Read information regarding changing your name.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-            }}}
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize(),onClick = { navController.navigate("FinancialInformationScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Financial information", fontWeight = FontWeight.Bold, lineHeight = TextUnit(2f, TextUnitType.Em))
-                    Text(text = "Review the status of your financial aid application", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Check the status of your document requirements", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    Text(text = "Review your loans", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-            }}}
+            .padding(vertical = 8.dp)
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
     }
 }
