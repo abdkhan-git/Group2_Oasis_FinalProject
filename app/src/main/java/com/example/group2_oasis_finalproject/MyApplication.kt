@@ -14,7 +14,8 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-// Perform initialization tasks here
+
+        // Perform initialization tasks here
         //FirebaseApp.initializeApp()
         UsersRepository = UsersRepository(this.applicationContext, FirebaseFirestore.getInstance())
     }
