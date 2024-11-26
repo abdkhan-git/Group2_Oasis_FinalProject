@@ -25,13 +25,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 
 @Composable
 fun financialinformationscreen(navController: NavController) {
     val Context = LocalContext.current
     LazyColumn {
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = {  })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -45,8 +46,8 @@ fun financialinformationscreen(navController: NavController) {
         }
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(),
             onClick = {
-//                val intent = Intent(Intent.ACTION_SEND).apply { putExtra(Intent.EXTRA_EMAIL, "FAOffice@Farmingdale.edu") }
-//                Context.startActivity(intent)
+                val intent = Intent(Intent.ACTION_SEND).apply { putExtra(Intent.EXTRA_EMAIL, "FAOffice@Farmingdale.edu") }
+                Context.startActivity(Intent.createChooser(intent, "Send an email using: "))
             })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
