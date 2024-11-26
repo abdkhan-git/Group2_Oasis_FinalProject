@@ -67,17 +67,13 @@ fun mainmenuscreen(navController: NavController) {
                     text = "Candidates for Graduation - Fall 2024 list",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .clickable { /* Handle click */ }
-                        .padding(vertical = 4.dp)
+                    modifier = Modifier.clickable { /* Handle click */ }.padding(vertical = 4.dp)
                 )
                 Text(
                     text = "Candidates for Graduation - Winter 2025 list",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .clickable { /* Handle click */ }
-                        .padding(vertical = 4.dp)
+                    modifier = Modifier.clickable { /* Handle click */ }.padding(vertical = 4.dp)
                 )
             }
         }
