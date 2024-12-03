@@ -1,5 +1,6 @@
 package com.example.group2_oasis_finalproject
 
+import ViewEmailScreen
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -31,8 +32,17 @@ fun navHost() {
         composable(route = "PersonalInformationScreen") {
             personalinformationscreen(navController)
         }//End of composable
+        composable(route = "ChangePinScreen") {
+            ChangePinScreen()
+        }//End of composable
+
+        composable(route = "ViewEmailScreen/{ramId}") { backStackEntry ->
+            val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
+            ViewEmailScreen(navController, ramId)
+        }// end of composable
+
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)
-        }//End of composable
+        }
     }//End of Navhost
 }

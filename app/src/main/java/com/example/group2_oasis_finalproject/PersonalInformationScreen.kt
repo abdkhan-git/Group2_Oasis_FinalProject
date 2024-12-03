@@ -21,15 +21,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
 fun personalinformationscreen(navController: NavController) {
+//    val userInfo by viewModel.userInfo.observeAsState()
+
+//    val userViewModel: UserViewModel = viewModel()
+//    val users = userViewModel.getUsersList()  // Assuming you have a method to get the list of users
+
+
     LazyColumn {
 
         //Change Pin
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(),
+            onClick = { navController.navigate("ChangePinScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -41,18 +50,19 @@ fun personalinformationscreen(navController: NavController) {
         } //end of change Pin
 
 
-        //View Email
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "View E-mail Address", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "View What Email Adress We Have On File For You", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                }
-            }
-        }
-        }//end of View Email
+
+//        //View Email
+//        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
+//            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("ViewEmailScreen/${user.ramId}") })
+//        {
+//            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+//                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+//                    Text(text = "View E-mail Address", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+//                    Text(text = "View What Email Adress We Have On File For You", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+//                }
+//            }
+//        }
+//        }//end of View Email
 
 
         //Name Change
