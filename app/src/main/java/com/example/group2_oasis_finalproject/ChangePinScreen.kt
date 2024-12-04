@@ -21,7 +21,7 @@ import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
 
 
 @Composable
-fun ChangePinScreen() {
+fun ChangePinScreen(navController: NavController) {
     var oldPin by rememberSaveable { mutableStateOf("") }
     var newPin by rememberSaveable { mutableStateOf("") }
     var reenterNewPin by rememberSaveable { mutableStateOf("") }

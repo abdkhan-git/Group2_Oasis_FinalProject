@@ -36,7 +36,7 @@ fun personalinformationscreen(navController: NavController) {
 
         //Change Pin
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
             modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(),
             onClick = { navController.navigate("ChangePinScreen") })
         {
@@ -51,23 +51,23 @@ fun personalinformationscreen(navController: NavController) {
 
 
 
-//        //View Email
-//        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-//            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("ViewEmailScreen/${user.ramId}") })
-//        {
-//            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-//                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-//                    Text(text = "View E-mail Address", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-//                    Text(text = "View What Email Adress We Have On File For You", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-//                }
-//            }
-//        }
-//        }//end of View Email
+        //View Email
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("ViewEmailScreen") })
+        {
+            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+                    Text(text = "View E-mail Address", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "View What Email Address We Have On File For You", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                }
+            }
+        }
+        }//end of View Email
 
 
         //Name Change
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("NameChangeScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -81,7 +81,7 @@ fun personalinformationscreen(navController: NavController) {
 
         //View Emergency Contacts
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("ViewEmergencyContactsScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {

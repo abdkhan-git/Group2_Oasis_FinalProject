@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -169,6 +170,32 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     selectedItemIndex = 4
                     financialinformationscreen(navController)
                 }
+                composable(route = "ChangePinScreen") {
+                    ChangePinScreen(navController)
+                }//End of composable
+
+
+                composable("ViewEmailScreen") { backStackEntry ->
+                    val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
+                    ViewEmailScreen(
+                        ramId = ramId,
+                        usersRepository = UsersRepository(
+                            context = LocalContext.current,
+                            firestoreDb = FirebaseFirestore.getInstance()
+                        )
+                    )
+                }
+                composable(route = "NameChangeScreen") {
+                    NameChangeScreen()
+                }//end
+
+                composable("ViewEmergencyContactsScreen") {
+                    ViewEmergencyContactsScreen(
+                        emergencyContacts = listOf("John Doe: (123) 456-7890", "Jane Smith: (987) 654-3210"),
+                        onUpdateContactsClick = { navController.navigate("updateEmergencyContacts") }
+                    )
+                }
+
             }
         }
     }

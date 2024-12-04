@@ -1,9 +1,7 @@
 package com.example.group2_oasis_finalproject
 
-import ViewEmailScreen
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -33,13 +31,8 @@ fun navHost() {
             personalinformationscreen(navController)
         }//End of composable
         composable(route = "ChangePinScreen") {
-            ChangePinScreen()
+            ChangePinScreen(navController)
         }//End of composable
-
-        composable(route = "ViewEmailScreen/{ramId}") { backStackEntry ->
-            val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
-            ViewEmailScreen(navController, ramId)
-        }// end of composable
 
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)
