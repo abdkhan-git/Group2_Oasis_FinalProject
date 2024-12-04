@@ -43,7 +43,6 @@ fun NameChangeScreen() {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
         )
-
         // Image
         Image(
             painter = painterResource(id = R.drawable.fsclogorgb),
