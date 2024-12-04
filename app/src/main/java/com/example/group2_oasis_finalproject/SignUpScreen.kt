@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import com.example.group2_oasis_finalproject.ui.theme.lightgraybutton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -134,8 +135,8 @@ fun signUpScreen(navController: NavController) {
             Button(
                 onClick = { navController.navigate("SignInScreen") },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Gray,
-                    contentColor = Color.White
+                    containerColor = lightgraybutton,
+                    contentColor = FarmingdaleGreen
                 ),
                 modifier = Modifier.weight(1f)
             ) {
