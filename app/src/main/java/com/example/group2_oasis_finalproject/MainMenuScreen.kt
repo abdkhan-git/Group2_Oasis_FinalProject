@@ -51,12 +51,28 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     )
                     Switch(
                         checked = isDarkModeEnabled,
-                        onCheckedChange = { viewModel.toggleTheme() } ,
+                        onCheckedChange = { viewModel.toggleTheme() }
                     )
                 }
             }
 
-            }
+            // Welcome Header
+            item {
+                Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                    currentUser?.let {
+                        Text(
+                            text = "Welcome, ${it.First} ${it.Last}",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                        Text(
+                            text = "Last access on $currentTime",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Gray
+                        )
+                    }
+                }
 
             // Graduation Section
             item {
@@ -143,8 +159,8 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     onClick = { /* Handle click */ }
                 )
             }
-        }
-    }
+        } // Close LazyColumn
+    } // Close MaterialTheme
 }
 
 
