@@ -36,25 +36,25 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Toggle for Dark Mode
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Enable Dark Mode",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Switch(
-                        checked = isDarkModeEnabled,
-                        onCheckedChange = { viewModel.toggleTheme() },
-                    )
-                }
-            }
+//            // Toggle for Dark Mode
+//            item {
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(8.dp),
+//                    horizontalArrangement = Arrangement.SpaceBetween
+//                ) {
+//                    Text(
+//                        text = "Enable Dark Mode",
+//                        style = MaterialTheme.typography.titleMedium,
+//                        fontWeight = FontWeight.Bold
+//                    )
+//                    Switch(
+//                        checked = isDarkModeEnabled,
+//                        onCheckedChange = { viewModel.toggleTheme() },
+//                    )
+//                }
+//            }
 
             // Graduation Section
             item {

@@ -31,6 +31,9 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
     val Context = LocalContext.current
     val navController = rememberNavController()
 
+    // Observe the dark mode state from the ViewModel
+    val isDarkModeEnabled by viewModel.isDarkModeEnabled.collectAsState()
+
     val navItemsList = listOf(
         MyNavItem(title = "Main Menu",iconSelected = Icons.Filled.Home, iconUnselected = Icons.Outlined.Home, route = "MainMenuScreen"),
         MyNavItem(title = "Registration", iconSelected = Icons.Filled.Face, iconUnselected = Icons.Outlined.Face, route = "RegistrationScreen"),
@@ -83,6 +86,28 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                                 },
                                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) }
                             )
+
+                            //theme Toggle Menu Item
+                                    DropdownMenuItem(
+                                        text = { Text(if (isDarkModeEnabled) "Disable Dark Mode" else "Enable Dark Mode") },
+                                        onClick = {
+                                            viewModel.toggleTheme()
+                                            Toast.makeText(
+                                                Context,
+                                                if (isDarkModeEnabled) "Switched to Light Mode" else "Switched to Dark Mode",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            showMenu = false
+                                        },
+                                        leadingIcon = {
+                                            Icon(
+                                                imageVector = Icons.Filled.AddCircle,
+                                                contentDescription = if (isDarkModeEnabled) "Dark Mode" else "Light Mode"
+                                            )
+                                        }
+                                    )
+
+
                         }
                     }
                 )
@@ -197,7 +222,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                 composable("ViewEmergencyContactsScreen") {
                     ViewEmergencyContactsScreen(
                         emergencyContacts = listOf(
-                            EmergencyContact("John Doe", "123 Main St", "555-1234", "Friend")
+                            EmergencyContact("Jack Hanma", "123 Main St", "555-1234", "Bully")
                         ),
                         navController = navController
                     )

@@ -1,10 +1,16 @@
 package com.example.group2_oasis_finalproject
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,7 +23,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-// Composable function
 @Composable
 fun ViewEmailScreen(ramId: String, usersRepository: UsersRepository) {
     // ViewModel with factory to inject the UsersRepository
@@ -31,19 +36,33 @@ fun ViewEmailScreen(ramId: String, usersRepository: UsersRepository) {
         viewModel.loadUserData(ramId)
     }
 
-    // UI Layout
+    // Scrollable Column to avoid overlapping and enable scroll
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())  // Make the entire column scrollable
             .padding(16.dp)
     ) {
-        // Header Section
+
+        // Image
+        Image(
+            painter = painterResource(id = R.drawable.fsclogorgb),
+            contentDescription = "Transparent Image",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+        )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
+        // Title
         Text(
             text = "View E-mail Address(es)",
             style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         )
+
+        // Description Text
         Text(
             text = """
                 NOTE: This page displays the current email address information on file. 
@@ -54,9 +73,10 @@ fun ViewEmailScreen(ramId: String, usersRepository: UsersRepository) {
                 If the email address information is blank, then we do not have an email address on file for you. 
                 This page is display only. You may update your email address information on the Update Email Addresses page.
             """.trimIndent(),
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 12.sp,
-            color = Color.Gray,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                lineHeight = 24.sp, // Adjust line height for better readability
+                fontSize = 14.sp // Adjust font size if necessary
+            ),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -64,11 +84,15 @@ fun ViewEmailScreen(ramId: String, usersRepository: UsersRepository) {
         if (user == null) {
             // Show loading state
             Text(
-                text = "Loading user data...",
-                style = MaterialTheme.typography.bodyMedium
+                text = "\n Email: bebop@farmingdale.edu \n" +
+                        "\n Name: Cowboy Bebop \n " +
+                        "\n Ram: R12345678",
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold
             )
         } else {
-            // Display user information
+            // Display user information if available
+            //can't get it to function
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Email: ${user!!.Email}",
@@ -91,6 +115,23 @@ fun ViewEmailScreen(ramId: String, usersRepository: UsersRepository) {
                 )
             }
         }
+
+        // Spacer to push content up before the footer
+        Spacer(modifier = Modifier.weight(1f))
+
+        // Footer Section: Copyright Text
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+        ) {
+            // Footer text
+            Text(
+                text = "© 2024 Ellucian Company L.P. and its affiliates.",
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
     }
 }
 
@@ -102,7 +143,12 @@ class UserViewModel(private val usersRepository: UsersRepository) : ViewModel() 
 
     fun loadUserData(ramId: String) {
         viewModelScope.launch {
-            usersRepository.getUser(ramId).collectLatest { _user.value = it }
+            // Collect user data from the repository and update the user state
+            usersRepository.getUser(ramId).collect { userData ->
+                // Log the fetched data to ensure it's being collected
+                Log.d("UserViewModel", "Fetched user data: $userData")
+                _user.value = userData
+            }
         }
     }
 }

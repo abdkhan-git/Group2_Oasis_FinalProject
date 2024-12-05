@@ -45,21 +45,13 @@ fun SocialSecurityScreen(context: Context) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Header
-        Text(
-            text = "Social Security Number Change Information",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
         // Scrollable Content
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // Image Placeholder
             item {
-                // Transparent Image Placeholder
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -75,6 +67,17 @@ fun SocialSecurityScreen(context: Context) {
                 }
             }
 
+            // Title Text
+            item {
+                Text(
+                    text = "Social Security Number Change Information",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
+
+            // Content Text
             item {
                 Text(
                     text = "A request to change your social security number in the College's Administrative System must be made in person at the appropriate office.",
@@ -96,8 +99,8 @@ fun SocialSecurityScreen(context: Context) {
                 )
             }
 
+            // Clickable Text for Link
             item {
-                // Clickable Text for Link
                 val linkText = buildAnnotatedString {
                     append("For additional information on how to apply for, replace, correct, or change your name on your Social Security Card, ")
                     pushStringAnnotation(tag = "URL", annotation = "https://www.ssa.gov/replace_sscard.html")
@@ -127,6 +130,7 @@ fun SocialSecurityScreen(context: Context) {
                 )
             }
 
+            // Footer Text
             item {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
