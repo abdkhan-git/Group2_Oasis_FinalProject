@@ -46,6 +46,8 @@ fun UpdateEmergencyContactsScreen(navController: NavController) {
                     .height(150.dp)
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = "Update Emergency Contacts - Select Contact",
                 style = MaterialTheme.typography.headlineMedium,

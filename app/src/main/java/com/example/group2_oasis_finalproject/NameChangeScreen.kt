@@ -36,13 +36,7 @@ fun NameChangeScreen() {
             .padding(16.dp)
             .verticalScroll(rememberScrollState()) // Make the column scrollable
     ) {
-        // Title
-        Text(
-            text = "Name Change Information",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+
         // Image
         Image(
             painter = painterResource(id = R.drawable.fsclogorgb),
@@ -51,6 +45,17 @@ fun NameChangeScreen() {
                 .fillMaxWidth()
                 .height(150.dp)
         )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
+        // Title
+        Text(
+            text = "Name Change Information",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
 
         Spacer(modifier = Modifier.height(16.dp))
 

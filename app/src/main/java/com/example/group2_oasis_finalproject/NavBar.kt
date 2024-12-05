@@ -206,6 +206,13 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     UpdateMaritalStatusScreen()
                 }//end
 
+                composable("SocialSecurityScreen") {
+                    SocialSecurityScreen(context = LocalContext.current)
+                }
+                composable("EmergencyAlertScreen") {
+                    EmergencyAlertScreen(context = LocalContext.current)
+                }
+
             }
         }
     }

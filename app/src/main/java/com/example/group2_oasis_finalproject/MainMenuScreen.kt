@@ -51,11 +51,9 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     )
                     Switch(
                         checked = isDarkModeEnabled,
-                        onCheckedChange = { viewModel.toggleTheme() } ,
+                        onCheckedChange = { viewModel.toggleTheme() },
                     )
                 }
-            }
-
             }
 
             // Graduation Section
@@ -105,7 +103,8 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     title = "Pay Your Bill",
                     description = "Access the Student Account Payment/Billing Center, to view your bill and pay online using MasterCard, Visa, Discover or Amex.",
                     onClick = {
-                        val webpage = Uri.parse("https://epay.farmingdale.edu/C21458_tsa/web/login.jsp")
+                        val webpage =
+                            Uri.parse("https://epay.farmingdale.edu/C21458_tsa/web/login.jsp")
                         val intent = Intent(Intent.ACTION_VIEW, webpage)
                         context.startActivity(intent)
                     }
@@ -146,7 +145,6 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
         }
     }
 }
-
 
 @Composable
 private fun MenuSection(

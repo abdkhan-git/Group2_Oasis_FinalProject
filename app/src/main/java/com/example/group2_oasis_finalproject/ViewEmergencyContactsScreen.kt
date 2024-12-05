@@ -1,12 +1,16 @@
 package com.example.group2_oasis_finalproject
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -30,9 +34,25 @@ fun ViewEmergencyContactsScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+
+        // Image
+        Image(
+            painter = painterResource(id = R.drawable.fsclogorgb),
+            contentDescription = "Transparent Image",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+        )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
         // Emergency Contacts Header
         Text(
-            text = "Emergency Contacts",
+            text = if (emergencyContacts.isNotEmpty()) {
+                "View Emergency Contacts"
+            } else {
+                "Caution: No Emergency Contact Information found."
+            },
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -63,7 +83,7 @@ fun ViewEmergencyContactsScreen(
         }
 
         // Update Emergency Contacts Button
-        Button(
+        OutlinedButton(
             onClick = { navController.navigate("UpdateEmergencyContactsScreen") }, // Navigate to Update Contacts screen
             modifier = Modifier
                 .fillMaxWidth()
@@ -71,5 +91,15 @@ fun ViewEmergencyContactsScreen(
         ) {
             Text(text = "Update Emergency Contacts")
         }
+
+        // Footer with Release Information
+        Spacer(modifier = Modifier.weight(1f)) // Push footer to the bottom
+        Text(
+            text = "Release: 8.7\n\n© 2024 Ellucian Company L.P. and its affiliates.",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
     }
 }
+
