@@ -8,9 +8,11 @@ data class Course(
     @ColumnInfo(name = "subject")
     var subject: String = "",
     @ColumnInfo(name = "number")
-    var number: Int = 0,
+    var number: String = "",
     @ColumnInfo(name = "credits")
-    var credits: Int = 0,
+    var credits: String = "",
     @ColumnInfo(name = "title")
     var title: String = "",
+    @ColumnInfo(name = "genEd")
+    var genEd: String = ""
 )

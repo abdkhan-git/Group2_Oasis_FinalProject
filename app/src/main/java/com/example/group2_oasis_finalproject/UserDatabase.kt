@@ -7,13 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.group2_oasis_finalproject.Data.Course
 import com.example.group2_oasis_finalproject.Data.CourseDao
+import com.example.group2_oasis_finalproject.Data.Section
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [User::class, Course::class],
-    version = 2,
+    entities = [User::class, Course::class, Section::class],
+    version = 6,
 )
 abstract class UserDatabase : RoomDatabase() {
 
@@ -27,6 +28,7 @@ abstract class UserDatabase : RoomDatabase() {
         fun getDatabase(context: Context): UserDatabase {
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, UserDatabase::class.java, "user_database")
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also {Instance = it}
             }
