@@ -209,6 +209,48 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     financialAidStatusScreen(navController)
                 }//End of composable
 
+                composable(route = "ViewHoldScreen") {
+                    Screentitle = "View Hold"
+                    shownavbar = true
+                    ViewHoldScreen(navController)
+                }
+                composable(route = "FinalGradeScreen") {
+                    Screentitle = "Final Grades"
+                    shownavbar = true
+                    FinalGradeScreen(navController)
+                }
+                composable(route = "AcademicTranscriptScreen") {
+                    Screentitle = "Academic Transcripts"
+                    shownavbar = true
+                    AcademicTranscriptScreen(navController)
+                }
+                composable(route = "AccountSummaryByTermScreen") {
+                    Screentitle = "Account Summary By Term"
+                    shownavbar = true
+                    AccountSummaryByTermScreen(navController)
+                }
+                composable(route = "AccountSummaryScreen") {
+                    Screentitle = "Account Summary"
+                    shownavbar = true
+                    AccountSummaryScreen(navController)
+                }
+                composable(route = "TaxNotificationScreen") {
+                    Screentitle = "Tax Notification"
+                    shownavbar = true
+                    TaxNotificationScreen(navController)
+                }
+                composable(route = "ViewStudentInformationScreen") {
+                    Screentitle = "View Student Information"
+                    shownavbar = true
+                    ViewStudentInformationScreen(navController)
+                }
+                composable(route = "OrderOfficialTranscriptScreen") {
+                    Screentitle = "Order Official Transcript"
+                    shownavbar = true
+                    OrderOfficialTranscriptScreen(navController)
+                }
+
+
             }
         }
     }
