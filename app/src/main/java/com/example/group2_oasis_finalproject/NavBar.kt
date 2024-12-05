@@ -205,6 +205,9 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                 composable(route = "UpdateMaritalStatusScreen") {
                     UpdateMaritalStatusScreen()
                 }//end
+                composable(route = "financialAidStatusScreen") {
+                    financialAidStatusScreen(navController)
+                }//End of composable
 
             }
         }
