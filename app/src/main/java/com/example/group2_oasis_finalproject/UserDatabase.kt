@@ -5,16 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.group2_oasis_finalproject.Data.Course
 import com.example.group2_oasis_finalproject.Data.CourseDao
+import com.example.group2_oasis_finalproject.Data.Schedule
 import com.example.group2_oasis_finalproject.Data.Section
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [User::class, Course::class, Section::class],
-    version = 6,
+    entities = [User::class, Section::class, Schedule::class],
+    version = 8,
 )
 abstract class UserDatabase : RoomDatabase() {
 

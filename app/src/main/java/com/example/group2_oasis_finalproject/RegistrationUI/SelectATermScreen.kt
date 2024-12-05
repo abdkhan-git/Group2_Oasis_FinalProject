@@ -26,14 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.group2_oasis_finalproject.Data.Course
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectATermScreen(navController: NavController) {
     val registrationScreenViewModel: RegistrationScreenViewModel =
         viewModel(navController.getBackStackEntry("RegistrationScreen"))
-    val registrationState by registrationScreenViewModel.uiState.collectAsState()
     val options = listOf("Fall 2024", "Spring 2025", "Summer 2025") //TODO move to db
     var expanded by remember { mutableStateOf(false) }
     var selectedOption by rememberSaveable { mutableStateOf(options[0]) }
@@ -108,5 +106,43 @@ fun SelectATermScreen(navController: NavController) {
         }
 
     }
-
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun dropDownMenu(
+    label: String,
+    options: List<String>,
+    onOptionSelected: (selectedOption: String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var selectedOption by rememberSaveable { mutableStateOf("") }
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = {expanded = !expanded}
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth().menuAnchor(),
+            value = selectedOption,
+            onValueChange = {},
+            label = {Text(label)},
+            trailingIcon = {ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)},
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+            readOnly = true
+        )
+        ExposedDropdownMenu(
+            expanded= expanded,
+            onDismissRequest = {expanded = false}
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = {Text(option)},
+                    onClick = {
+                        onOptionSelected(option)
+                        selectedOption = option
+                        expanded = false
+                    }
+                )
+            }
+
+}}}

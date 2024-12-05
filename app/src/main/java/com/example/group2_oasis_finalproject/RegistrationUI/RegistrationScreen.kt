@@ -44,20 +44,20 @@ fun registrationscreen(navController: NavController) {
             )
         }
         //Select a Term
-        item {
-            ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-                .fillMaxSize(), onClick = { navController.navigate("SelectATermScreen") })
-            {
-                Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                        Text(text = "Select a Term", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                        Text(text = "Select from a list of Web-avaliable terms", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                    }
-                    Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-                }
-            }}
+//        item {
+//            ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(10.dp)
+//                .fillMaxSize(), onClick = { navController.navigate("SelectATermScreen") })
+//            {
+//                Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+//                    Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+//                        Text(text = "Select a Term", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+//                        Text(text = "Select from a list of Web-avaliable terms", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+//                    }
+//                    Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+//                }
+//            }}
         // Check your registration status
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
@@ -72,47 +72,47 @@ fun registrationscreen(navController: NavController) {
                 Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
             }
         }}
-        // look-up classes to add
+        // Add classes
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("searchSectionsScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Look-up Classes to Add", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Add Classes", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
                     Text(text = "Search for available classes...", lineHeight = TextUnit(1.5f, TextUnitType.Em))
                 }
                 Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
             }
         }}
-        // add/drop classes
+        // Drop Classes
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("DropClassesScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Add/Drop Classes", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "Register for classes and/or change your schedule.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Drop Classes", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Remove classes from your schedule.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
                 }
                 Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
             }
         }} // Student Detail Schedule
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
-        {
-            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Student Detail Schedule", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "Your class schedule in detail.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-                }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-            }
-        }}
+//        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(10.dp)
+//            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+//        {
+//            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+//                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
+//                    Text(text = "Student Detail Schedule", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+//                    Text(text = "Your class schedule in detail.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+//                }
+//                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+//            }
+//        }}
         //concise student schedule
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()

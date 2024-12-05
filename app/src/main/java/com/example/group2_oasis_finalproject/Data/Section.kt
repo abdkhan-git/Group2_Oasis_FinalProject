@@ -7,40 +7,38 @@ import androidx.room.ForeignKey
 @Entity(
     tableName = "Section",
     primaryKeys = ["crn"],
-    foreignKeys = [
-        ForeignKey(
-            entity = Course::class,
-            parentColumns = ["subject", "number"],
-            childColumns = ["courseSubject", "courseNumber"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
 )
 data class Section (
     @ColumnInfo(name = "crn")
-    var crn : String,
-    @ColumnInfo(name = "courseSubject")
-    var courseSubject : String,
-    @ColumnInfo(name = "courseNumber")
-    var courseNumber : String,
+    var crn : String = "",
+    @ColumnInfo(name = "subject")
+    var courseSubject : String = "",
+    @ColumnInfo(name = "number")
+    var courseNumber : String = "",
     @ColumnInfo(name = "section")
-    var section : String, // Modality
+    var section : String = "", // Modality
     @ColumnInfo(name = "days")
-    var days : String,
+    var days : String = "",
     @ColumnInfo(name = "time")
-    var time : String,
+    var time : String = "",
     @ColumnInfo(name = "capacity")
-    var capacity : String,
+    var capacity : String = "",
     @ColumnInfo(name = "actual")
-    var actual : String,
+    var actual : String = "",
     @ColumnInfo(name = "remaining")
-    var remaining : String,
+    var remaining : String = "",
     @ColumnInfo(name = "instructor")
-    var instructor : String,
+    var instructor : String = "",
     @ColumnInfo(name = "date")
-    var date : String,
+    var date : String = "",
     @ColumnInfo(name = "location")
-    var location : String,
+    var location : String = "",
     @ColumnInfo(name = "term")
-    var term : String
+    var term : String = "",
+    @ColumnInfo(name = "credits")
+    var credits: String = "",
+    @ColumnInfo(name = "title")
+    var title: String = "",
+    @ColumnInfo(name = "genEd")
+    var genEd: String = ""
 )

@@ -1,7 +1,6 @@
 package com.example.group2_oasis_finalproject
 
 import android.app.Application
-import com.example.group2_oasis_finalproject.Data.Course
 import com.example.group2_oasis_finalproject.Data.CourseRepository
 import com.example.group2_oasis_finalproject.Data.OfflineCourseRepository
 import com.google.firebase.FirebaseApp

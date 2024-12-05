@@ -21,8 +21,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.group2_oasis_finalproject.RegistrationUI.SectionSearchResults
 import com.example.group2_oasis_finalproject.RegistrationUI.SelectATermScreen
+import com.example.group2_oasis_finalproject.RegistrationUI.dropClassesScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.registrationscreen
+import com.example.group2_oasis_finalproject.RegistrationUI.searchSectionsScreen
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -174,6 +177,21 @@ fun navBar() {
                     Screentitle = "Select a Term"
                     selectedItemIndex = 4
                     SelectATermScreen(navController)
+                }
+                composable(route = "searchSectionsScreen") {
+                    Screentitle = "Section Search"
+                    selectedItemIndex = 4
+                    searchSectionsScreen(navController)
+                }
+                composable(route = "SectionSearchResults") {
+                    Screentitle = "Sections"
+                    selectedItemIndex = 4
+                    SectionSearchResults(navController)
+                }
+                composable(route = "DropClassesScreen") {
+                    Screentitle = "Drop Classes"
+                    selectedItemIndex = 4
+                    dropClassesScreen(navController)
                 }
             }
         }

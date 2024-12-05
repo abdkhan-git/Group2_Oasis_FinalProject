@@ -26,6 +26,8 @@ fun mainmenuscreen(navController: NavController) {
         SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.US).format(Date())
     }
 
+    GlobalData.currentUser = currentUser
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
