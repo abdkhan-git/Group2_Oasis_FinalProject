@@ -33,7 +33,7 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     fun deleteSubject(user: User) { userDao.deleteSubject(user) }
 
-    fun getAllUsers() : Flow<List<User>> {
+    fun getAllUsersFB() : Flow<List<User>> {
         val queryFlow : Flow<List<User>> = firestoreDb.collection("OasisUsers").dataObjects<User>()
         return queryFlow
     }

@@ -33,6 +33,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -109,7 +111,7 @@ fun signinscreen(navController: NavController) {
             Alignment.CenterHorizontally
         ) {
             OutlinedTextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Ram ID")}, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 
             Row {
                 OutlinedButton(
