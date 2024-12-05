@@ -189,14 +189,25 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     NameChangeScreen()
                 }//end
 
+                composable(route = "UpdateEmergencyContactsScreen") {
+                    UpdateEmergencyContactsScreen(navController)
+                }//end
+
+
                 composable("ViewEmergencyContactsScreen") {
                     ViewEmergencyContactsScreen(
-                        emergencyContacts = listOf("John Doe: (123) 456-7890", "Jane Smith: (987) 654-3210"),
-                        onUpdateContactsClick = { navController.navigate("updateEmergencyContacts") }
+                        emergencyContacts = listOf(
+                            EmergencyContact("John Doe", "123 Main St", "555-1234", "Friend")
+                        ),
+                        navController = navController
                     )
                 }
+                composable(route = "UpdateMaritalStatusScreen") {
+                    UpdateMaritalStatusScreen()
+                }//end
 
             }
         }
     }
 }
+
