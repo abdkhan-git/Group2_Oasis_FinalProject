@@ -19,7 +19,9 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
     private val database: UserDatabase = Room.databaseBuilder(context, UserDatabase::class.java, "study.db").addCallback(databaseCallback).build()
     private val userDao = database.userDao()
 
-    fun getUser(RamID : String) = userDao.getUser(RamID)
+    fun getUser(ramId: String): Flow<User?> {
+        return userDao.getUser(ramId)  // Make sure the DAO returns the correct Flow<User?>
+    }
 
     fun getUsers() = userDao.getUsers()
 

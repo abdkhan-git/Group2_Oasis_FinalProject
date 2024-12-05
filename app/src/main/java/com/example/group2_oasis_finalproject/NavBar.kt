@@ -18,14 +18,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun navBar() {
+fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
     val Context = LocalContext.current
     val navController = rememberNavController()
 
@@ -143,7 +145,7 @@ fun navBar() {
                     Screentitle = "Main Menu"
                     shownavbar = true
                     selectedItemIndex = 0
-                    mainmenuscreen(navController)
+                    mainmenuscreen(navController = navController, viewModel = viewModel)
                 }
                 composable(route = "signUpScreen") {
                     signUpScreen(navController)
@@ -168,7 +170,44 @@ fun navBar() {
                     selectedItemIndex = 4
                     financialinformationscreen(navController)
                 }
+                composable(route = "ChangePinScreen") {
+                    ChangePinScreen(navController)
+                }//End of composable
+
+
+                composable("ViewEmailScreen") { backStackEntry ->
+                    val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
+                    ViewEmailScreen(
+                        ramId = ramId,
+                        usersRepository = UsersRepository(
+                            context = LocalContext.current,
+                            firestoreDb = FirebaseFirestore.getInstance()
+                        )
+                    )
+                }
+                composable(route = "NameChangeScreen") {
+                    NameChangeScreen()
+                }//end
+
+                composable(route = "UpdateEmergencyContactsScreen") {
+                    UpdateEmergencyContactsScreen(navController)
+                }//end
+
+
+                composable("ViewEmergencyContactsScreen") {
+                    ViewEmergencyContactsScreen(
+                        emergencyContacts = listOf(
+                            EmergencyContact("John Doe", "123 Main St", "555-1234", "Friend")
+                        ),
+                        navController = navController
+                    )
+                }
+                composable(route = "UpdateMaritalStatusScreen") {
+                    UpdateMaritalStatusScreen()
+                }//end
+
             }
         }
     }
 }
+
