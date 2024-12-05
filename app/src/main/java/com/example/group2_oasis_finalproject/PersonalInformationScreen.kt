@@ -26,10 +26,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun personalinformationscreen(navController: NavController) {
-//    val userInfo by viewModel.userInfo.observeAsState()
 
-//    val userViewModel: UserViewModel = viewModel()
-//    val users = userViewModel.getUsersList()  // Assuming you have a method to get the list of users
 
 
     LazyColumn {
@@ -95,7 +92,7 @@ fun personalinformationscreen(navController: NavController) {
 
         // Update Emergency Contacts
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("UpdateEmergencyContactsScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -109,7 +106,7 @@ fun personalinformationscreen(navController: NavController) {
 
         //Material Status
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("UpdateMaritalStatusScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
