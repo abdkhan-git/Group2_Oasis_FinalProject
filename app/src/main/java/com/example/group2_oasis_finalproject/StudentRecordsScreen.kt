@@ -2,7 +2,11 @@ package com.example.group2_oasis_finalproject
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,11 +20,26 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +62,6 @@ import androidx.navigation.NavController
 @Composable
 fun studentrecordsscreen(navController: NavController) {
     val context = LocalContext.current
-
 
     LazyColumn {
         item {
@@ -321,6 +339,7 @@ fun studentrecordsscreen(navController: NavController) {
 @Composable
 fun ViewHoldScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -349,11 +368,10 @@ fun ViewHoldScreen(navController: NavController, modifier: Modifier = Modifier) 
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// todo - [] FinalGradeScreen
+// todo - [x] FinalGradeScreen
 @Composable
 fun FinalGradeScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
-
 
     Column(
         modifier = modifier
@@ -362,20 +380,66 @@ fun FinalGradeScreen(navController: NavController, modifier: Modifier = Modifier
             .verticalScroll(scrollState)
     ) {
         Text(
-            text = "Testing.",
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Normal,
+            text = "Semester: Fall 2024",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        ) {
+            Text(
+                text = "GPA: 4.00",
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium
+            )
+        }
 
+        Divider(color = Color.Gray, thickness = 1.dp)
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Another test",
-            style = MaterialTheme.typography.headlineSmall,
+            text = "Courses:",
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            val courses = listOf(
+                "BCS430: Senior Project",
+                "BCS371: Mobile Application Development",
+                "BCS450: AWS",
+                "CSC325: Software Engineering"
+            )
+
+            courses.forEach { course ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = course,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Text(
+                        text = "A",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+        }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -384,7 +448,6 @@ fun FinalGradeScreen(navController: NavController, modifier: Modifier = Modifier
 fun AcademicTranscriptScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
 
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -392,20 +455,62 @@ fun AcademicTranscriptScreen(navController: NavController, modifier: Modifier = 
             .verticalScroll(scrollState)
     ) {
         Text(
-            text = "Testing.",
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Normal,
+            text = "Academic Transcripts",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
+        Divider(color = Color.Gray, thickness = 1.dp)
+        Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Another test",
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            val courses = listOf(
+                "BCS430: Senior Project",
+                "BCS371: Mobile Application Development",
+                "BCS450: AWS",
+                "CSC325: Software Engineering"
+            )
+
+            courses.forEach { course ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = course,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Text(
+                        text = "A",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+            Divider()
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                Text(
+                    text = "GPA: 4.00",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,6 +518,7 @@ fun AcademicTranscriptScreen(navController: NavController, modifier: Modifier = 
 @Composable
 fun AccountSummaryByTermScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
+
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -589,6 +695,7 @@ fun ChargeRow(charge: ChargeItem) {
 @Composable
 fun AccountSummaryScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
+
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -753,22 +860,166 @@ fun AccountSummaryChargeRow(charge: AccountChargeItem) {
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// todo - [] TaxNotificationScreen
+// todo - [x] TaxNotificationScreen
 @Composable
 fun TaxNotificationScreen(navController: NavController, modifier: Modifier = Modifier) {
-    val scrollState = rememberScrollState()
-
+    val context = LocalContext.current
+    var selectedYear by remember { mutableStateOf<String?>(null) }
+    val taxYears = listOf("2024", "2025", "2026", "2027")
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
-            .verticalScroll(scrollState)
     ) {
-        //dropdown here for year 2024
+        Text(
+            text = "This is the information which has been, or will be, reported to the IRS on Form 1098-T. " +
+                    "If you believe that information is incorrect, please contact the Bursar's Office immediately. " +
+                    "You can update address and/or taxpayer information on the Student Tax Information page.\n",
+            style = MaterialTheme.typography.bodySmall,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Normal,
+        )
 
+        Spacer(modifier = Modifier.height(16.dp))
 
-        //then an error Tax Notifications are not available for the tax year requested at this time.
+        Text(
+            text = "Select a year to view its tax information:",
+            style = MaterialTheme.typography.bodyLarge,
+        )
+
+        // Taken from OrderOfficialTranscriptScreen to make the user's experience easier
+        val annotatedText = buildAnnotatedString {
+            append("To get your Form 1098-T, click ")
+            pushStringAnnotation(
+                tag = "URL",
+                annotation = "https://oasis.farmingdale.edu/pls/prod/bwtktxys.p_get_tax_year"
+            )
+            withStyle(style = SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
+                append("here.")
+            }
+            pop()
+            append(" \n\nNOTE: Be sure to close all windows when you are done to protect your personal information.")
+        }
+
+        ClickableText(
+            text = annotatedText,
+            style = MaterialTheme.typography.bodyMedium,
+            onClick = { offset ->
+                annotatedText.getStringAnnotations(tag = "URL", start = offset, end = offset)
+                    .firstOrNull()?.let { annotation ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(annotation.item))
+                        context.startActivity(intent)
+                    }
+            }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp)
+        ){
+            items(taxYears) { year ->
+                TaxYearItem(
+                    year = year,
+                    isExpanded = selectedYear == year,
+                    onClick = {
+                        selectedYear = if (selectedYear == year) null else year
+                    }
+                )
+                Divider()
+            }
+        }
+    }
+}
+
+@Composable
+fun TaxYearItem(
+    year: String,
+    isExpanded: Boolean,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(12.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = year,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+            Icon(
+                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                contentDescription = if (isExpanded) "Collapse" else "Expand"
+            )
+        }
+
+        // If you guys wanna learn about this animation this is the link
+        // todo - https://developer.android.com/develop/ui/compose/animation/composables-modifiers#animatedvisibility
+        AnimatedVisibility(visible = isExpanded) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+            ) {
+                when (year) {
+                    "2024" -> {
+                        Text(
+                            text = "Detail of Payment Received for $year:",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text =  "• Unsubsidized DL Loan: \$4,440.46\n" +
+                                    "• Refund: \$559.54\n" +
+                                    "• Term Total: \$4,440.46\n" +
+                                    "• Term All Total: \$4,440.46\n",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontSize = 14.sp
+                        )
+                        //////////////////////////////////////////////////////////////
+                        Text(
+                            text = "Detail of Charges Billed for $year:",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text =  "• Intercollegiate Athletic Fee: \$215.00\n" +
+                                    "• College Fee: \$25.00\n" +
+                                    "• Recreation Fee: \$10.00\n" +
+                                    "• Student Activity Fee: \$100.00\n" +
+                                    "• Technology Fee: \$222.00\n" +
+                                    "• Transcript Fees: \$24.00\n" +
+                                    "• Tuition Charge: \$3,904.46\n"+
+                                    "• Term Total: \$4,440.46\n" +
+                                    "• Term All Total: \$4,440.46\n",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontSize = 14.sp
+                        )
+                    }
+                    "2025", "2026", "2027" -> {
+                        Text(
+                            text = "Tax Notifications are not available for the tax year requested at this time.",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                    // Can add an else for other years but 4 years of available Tax Info would be enough
+                }
+            }
+        }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -776,7 +1027,6 @@ fun TaxNotificationScreen(navController: NavController, modifier: Modifier = Mod
 @Composable
 fun ViewStudentInformationScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState()
-
 
     Column(
         modifier = modifier
@@ -867,7 +1117,6 @@ fun OrderOfficialTranscriptScreen(navController: NavController, modifier: Modifi
     val context = LocalContext.current
     val scrollState = rememberScrollState()
 
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -881,24 +1130,19 @@ fun OrderOfficialTranscriptScreen(navController: NavController, modifier: Modifi
                     "We are now attempting to open another browser window (popup) and will transmit your information to Credentials Solutions to begin the transcript order process.\n" +
                     "If the window does not launch in a few seconds, please tap ")
 
-
             pushStringAnnotation(
                 tag = "URL",
                 annotation = "https://www.parchment.com/tplus/sso/login"
             )
 
-
             withStyle(style = SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
                 append("here")
             }
 
-
             pop()
-
 
             append(" \n\nNOTE: Be sure to close all windows when you are done to protect your personal information.")
         }
-
 
         ClickableText(
             text = annotatedText,
@@ -911,7 +1155,6 @@ fun OrderOfficialTranscriptScreen(navController: NavController, modifier: Modifi
                     }
             }
         )
-
 
         Text(
             text = "This is the Order Official Transcript screen.",
