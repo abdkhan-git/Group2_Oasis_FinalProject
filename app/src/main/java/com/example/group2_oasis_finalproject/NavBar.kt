@@ -24,7 +24,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.group2_oasis_finalproject.RegistrationUI.ScheduleScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.SectionSearchResults
-import com.example.group2_oasis_finalproject.RegistrationUI.SelectATermScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.dropClassesScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.registrationscreen
 import com.example.group2_oasis_finalproject.RegistrationUI.searchSectionsScreen
@@ -254,11 +253,6 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     Screentitle = "Order Official Transcript"
                     shownavbar = true
                     OrderOfficialTranscriptScreen(navController)
-                }
-                composable(route = "SelectATermScreen") {
-                    Screentitle = "Select a Term"
-                    selectedItemIndex = 4
-                    SelectATermScreen(navController)
                 }
                 composable(route = "searchSectionsScreen") {
                     Screentitle = "Section Search"
