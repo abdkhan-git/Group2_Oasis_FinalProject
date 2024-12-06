@@ -289,6 +289,18 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                         shownavbar = true
                         OrderOfficialTranscriptScreen(navController)
                     }
+                    composable(route = "GraduationListFall2024") {
+                    Screentitle = "Candidates for Graduation - Fall 2024"
+                    shownavbar = true
+                    GraduationListScreen(term = "Fall 2024")
+                    }
+
+                    composable(route = "GraduationListWinter2025") {
+                    Screentitle = "Candidates for Graduation - Winter 2025"
+                    shownavbar = true
+                    GraduationListScreen(term = "Winter 2025")
+                    }
+
                     composable(route = "searchSectionsScreen") {
                         Screentitle = "Section Search"
                         selectedItemIndex = 4

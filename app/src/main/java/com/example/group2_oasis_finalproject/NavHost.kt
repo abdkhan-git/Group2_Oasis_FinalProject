@@ -31,6 +31,13 @@ fun navHost() {
             personalinformationscreen(navController)
         }//End of composable
 
+        composable(route = "GraduationListFall2024") {
+            GraduationListScreen(term = "Fall 2024")
+        }
+        composable(route = "GraduationListWinter2025") {
+            GraduationListScreen(term = "Winter 2025")
+        }
+
         composable(route = "ChangePinScreen") {
 //            ChangePinScreen(navController)
         }//End of composable
