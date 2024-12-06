@@ -74,7 +74,7 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
-                            .clickable { /* Handle click */ }
+                            .clickable { navController.navigate("GraduationListFall2024") }
                             .padding(vertical = 4.dp)
                     )
                     Text(
@@ -82,7 +82,7 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
-                            .clickable { /* Handle click */ }
+                            .clickable { navController.navigate("GraduationListWinter2025") }
                             .padding(vertical = 4.dp)
                     )
                 }
