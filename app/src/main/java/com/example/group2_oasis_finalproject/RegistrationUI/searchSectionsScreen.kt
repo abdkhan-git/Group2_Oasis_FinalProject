@@ -34,15 +34,7 @@ fun searchSectionsScreen(navController: NavController) {
         viewModel(navController.getBackStackEntry("RegistrationScreen"))
     val registrationState by registrationScreenViewModel.uiState.collectAsState()
 
-    //preemptive insert code for this example
-    // The live version of this app would be plugged into banner and pull data from there
-//    val course = Course("CSC", "321", "2", "Principles of Programming Languages")
-//    val course1 = Course("BCS", "371", "3", "Mobile Application Development I")
-//    val course2 = Course("EGL", "314", "4", "Major Authors in World Literature")
-//    registrationScreenViewModel.addCourse(Course("EGL", "315", "4", " Literature"))
-//    registrationScreenViewModel.addCourse(course)
-//    registrationScreenViewModel.addCourse(course1)
-//    registrationScreenViewModel.addCourse(course2)
+    //Example Data to make a schedule with
     val section = Section(
         "12345", "CSC", "321", "In Person",
         "F", "01:40 pm-02:55 pm", "24", "20", "4",
@@ -69,48 +61,15 @@ fun searchSectionsScreen(navController: NavController) {
 
     val terms by registrationScreenViewModel.listTerms.collectAsState()
     val subjects by registrationScreenViewModel.listSubjects.collectAsState()
-//    val modalities by registrationScreenViewModel.listModality.collectAsState()
-//    val credits by registrationScreenViewModel.listCredits.collectAsState()
-//    val instructors by registrationScreenViewModel.listInstructors.collectAsState()
-//    val genEds by registrationScreenViewModel.listGenEds.collectAsState()
-//    val times by registrationScreenViewModel.listTimes.collectAsState()
-//    val days by registrationScreenViewModel.listDays.collectAsState()
-//    val courseNumber by registrationScreenViewModel.listCourseNumber.collectAsState()
-//    val title by registrationScreenViewModel.listTitle.collectAsState()
 
 
 //    Log.i("HomeUI", "current days: ${days}")
     if (
-//        days.listThings.isEmpty() or times.listThings.isEmpty() or
         terms.listThings.isEmpty() or subjects.listThings.isEmpty() //or
-//        modalities.listThings.isEmpty() or credits.listThings.isEmpty() or
-//        instructors.listThings.isEmpty() or genEds.listThings.isEmpty() or
-//        courseNumber.listThings.isEmpty() or title.listThings.isEmpty()
         ) {
         Text("Loading")
     }
     else {
-//        registrationScreenViewModel.updateDays(days.listThings[0])
-//        registrationScreenViewModel.updateTime(times.listThings[0])
-//        registrationScreenViewModel.updateTerm(terms.listThings[0])
-//        registrationScreenViewModel.updateSubject(subjects.listThings[0])
-//        registrationScreenViewModel.updateInstructionalMethod(modalities.listThings[0])
-//        registrationScreenViewModel.updateCredits(credits.listThings[0])
-//        registrationScreenViewModel.updateInstructor(instructors.listThings[0])
-//        registrationScreenViewModel.updateAttributeType(genEds.listThings[0])
-//        registrationScreenViewModel.updateTitle(instructors.listThings[0])
-//        registrationScreenViewModel.updateCourse(genEds.listThings[0])
-
-//        registrationScreenViewModel.updateDays(null)
-//        registrationScreenViewModel.updateTime(null)
-//        registrationScreenViewModel.updateTerm(null)
-//        registrationScreenViewModel.updateSubject(null)
-//        registrationScreenViewModel.updateInstructionalMethod(null)
-//        registrationScreenViewModel.updateCredits(null)
-//        registrationScreenViewModel.updateInstructor(null)
-//        registrationScreenViewModel.updateAttributeType(null)
-//        registrationScreenViewModel.updateTitle(null)
-//        registrationScreenViewModel.updateCourse(null)
         Column(
             Modifier
                 .fillMaxSize()
@@ -120,31 +79,6 @@ fun searchSectionsScreen(navController: NavController) {
         ) {
         dropDownMenu("Term", terms.listThings, registrationScreenViewModel::updateTerm)
         dropDownMenu("Subjects", subjects.listThings, registrationScreenViewModel::updateSubject)
-//            dropDownMenu("Course Number", courseNumber.listThings, registrationScreenViewModel::updateCourse)
-//            dropDownMenu("Title", title.listThings, registrationScreenViewModel::updateTitle)
-
-//            OutlinedTextField(
-//                value = "Course",
-//                onValueChange = { newValue ->
-//                    registrationScreenViewModel.updateCourse(newValue)
-//                },
-//                label = { Text(text = "Course Number") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//            OutlinedTextField(
-//                value = "Title",
-//                onValueChange = { newValue ->
-//                    registrationScreenViewModel.updateTitle(newValue)
-//                },
-//                label = { Text(text = "Title") },
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        dropDownMenu("Instructional Methods", modalities.listThings, registrationScreenViewModel::updateInstructionalMethod)
-//        dropDownMenu("Credits",credits.listThings, registrationScreenViewModel::updateCredits)
-//        dropDownMenu("Instructors",instructors.listThings, registrationScreenViewModel::updateInstructor)
-//        dropDownMenu("Attribute Types",genEds.listThings, registrationScreenViewModel::updateAttributeType)
-//        dropDownMenu("Times",times.listThings, registrationScreenViewModel::updateTime)
-//            dropDownMenu("Days", days.listThings, registrationScreenViewModel::updateDays)
             Button(
                 onClick = {
                     navController.navigate("SectionSearchResults")

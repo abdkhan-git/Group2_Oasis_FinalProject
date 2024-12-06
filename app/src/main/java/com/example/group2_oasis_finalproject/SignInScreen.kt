@@ -33,12 +33,15 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import com.example.group2_oasis_finalproject.ui.theme.lightgraybutton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -108,7 +111,7 @@ fun signinscreen(navController: NavController) {
             Alignment.CenterHorizontally
         ) {
             OutlinedTextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Ram ID")}, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 
             Row {
                 OutlinedButton(
@@ -135,8 +138,8 @@ fun signinscreen(navController: NavController) {
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = FarmingdaleGreen
+                        containerColor = FarmingdaleGreen,
+                        contentColor = lightgraybutton
                     )
                 ) { Text(text = "Login") }
 
@@ -145,8 +148,8 @@ fun signinscreen(navController: NavController) {
                 Button(
                     onClick = { navController.navigate("signUpScreen") },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = FarmingdaleGreen,
-                        contentColor = Color.White
+                        containerColor = lightgraybutton,
+                        contentColor = FarmingdaleGreen
                     )
                 ) {
                     Text(text = "Register")

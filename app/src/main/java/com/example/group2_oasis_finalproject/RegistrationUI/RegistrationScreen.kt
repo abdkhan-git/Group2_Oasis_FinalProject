@@ -1,5 +1,7 @@
 package com.example.group2_oasis_finalproject.RegistrationUI
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
@@ -26,6 +29,8 @@ import com.example.group2_oasis_finalproject.R
 
 @Composable
 fun registrationscreen(navController: NavController) {
+    val Context = LocalContext.current
+
     LazyColumn {
         item {
             Text(
@@ -43,26 +48,11 @@ fun registrationscreen(navController: NavController) {
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }
-        //Select a Term
-//        item {
-//            ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(10.dp)
-//                .fillMaxSize(), onClick = { navController.navigate("SelectATermScreen") })
-//            {
-//                Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-//                    Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-//                        Text(text = "Select a Term", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-//                        Text(text = "Select from a list of Web-avaliable terms", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-//                    }
-//                    Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-//                }
-//            }}
-        // Check your registration status
+        //Check registration status
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("ViewHoldScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -99,25 +89,12 @@ fun registrationscreen(navController: NavController) {
                 }
                 Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
             }
-        }} // Student Detail Schedule
-//        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(10.dp)
-//            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
-//        {
-//            Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
-//                Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-//                    Text(text = "Student Detail Schedule", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-//                    Text(text = "Your class schedule in detail.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
-//                }
-//                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
-//            }
-//        }}
+        }}
         //concise student schedule
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("ScheduleScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -128,24 +105,27 @@ fun registrationscreen(navController: NavController) {
             }
         }}
         //Order Textbooks Online
-        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+        item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(),
+            onClick = {
+                val webpage: Uri = Uri.parse("https://farmingdale.bncollege.com/course-material-listing-page?utm_campaign=storeId=30053_langId=-1_courseData=BCS_371_HY1_F24%7CCSC_321_001_F24%7CCSC_332_HY2_F24%7CCSC_345_001_F24%7CCSC_411_001_W25%7CCSC_466_HY2_W25%7CCSC_490_HY2_W25&utm_source=wcs&utm_medium=registration_integration")
+                val intent = Intent(Intent.ACTION_VIEW, webpage)
+                Context.startActivity(intent) })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Order Textbooks Online", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "View the textbooks assigned to the courses you are registered in, at the Farmingdale State bookstore (Barnes and Noble). Purchase option available.", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Financial Aid Tools and Resources", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Financial Aid Tools and Resources", lineHeight = TextUnit(1.5f, TextUnitType.Em))
                 }
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(Alignment.CenterVertically))
+                Image(imageVector = ImageVector.vectorResource(id = R.drawable.fsc), contentDescription = "", Modifier.align(
+                    Alignment.CenterVertically))
             }
-        }}
+        }
+        }
         //	Complete Registration & Pay Your Bill
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("AccountSummaryScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -159,7 +139,7 @@ fun registrationscreen(navController: NavController) {
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,), modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            .fillMaxSize(), onClick = { navController.navigate("ViewHoldScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {

@@ -76,6 +76,20 @@ fun searchSections(
     @Query("SELECT * FROM Schedule WHERE (RamID = :RamID)")
     fun getUsersSchedule(RamID: String): Flow<List<Schedule>>
 
+    @Query("""
+        SELECT 
+            Section.crn, 
+            subject, 
+            number, 
+            Section.title, 
+            Section.instructor,
+            Section.days
+        FROM Section
+        INNER JOIN Schedule ON Section.crn = Schedule.crn
+        WHERE Schedule.RamID = :ramID
+    """)
+    fun getSectionsForUser(ramID: String): Flow<List<SectionWithSchedule>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addSection(section : Section)
 
@@ -118,3 +132,12 @@ fun searchSections(
     @Query("SELECT * FROM Section")
     fun getAllSections(): Flow<List<Section>>
 }
+
+data class SectionWithSchedule(
+    val crn: String,
+    val subject: String,
+    val number: String,
+    val title: String,
+    val instructor: String,
+    val days: String
+)

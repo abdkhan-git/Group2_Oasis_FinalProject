@@ -9,6 +9,7 @@ import com.example.group2_oasis_finalproject.Data.CourseRepository
 import com.example.group2_oasis_finalproject.Data.OfflineCourseRepository
 import com.example.group2_oasis_finalproject.Data.Schedule
 import com.example.group2_oasis_finalproject.Data.Section
+import com.example.group2_oasis_finalproject.Data.SectionWithSchedule
 import com.example.group2_oasis_finalproject.GlobalData
 import com.example.group2_oasis_finalproject.MyApplication
 import kotlinx.coroutines.flow.Flow
@@ -122,6 +123,10 @@ class RegistrationScreenViewModel(private val courseRepository: CourseRepository
 //                initialValue = ListDays()
 //            )
 //
+fun getSectionsForUser(ramID: String): StateFlow<List<SectionWithSchedule>> {
+    return courseRepository.getSectionsForUser(ramID)
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+}
 val listSchedule: StateFlow<ListSchedule> =
     courseRepository.getUsersSchedule(GlobalData.currentUser?.RamID ?: "").map { classes ->
         Log.i("RegistrationState", "Mapped class: $classes")

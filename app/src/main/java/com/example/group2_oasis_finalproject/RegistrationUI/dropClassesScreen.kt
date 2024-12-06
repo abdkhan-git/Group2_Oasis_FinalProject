@@ -39,8 +39,8 @@ fun dropClassesScreen(navController: NavController) {
 
     val checkedList = remember { mutableStateOf(setOf<Schedule>()) }
 
-    Log.i("SearchResults", "search params: $registrationState")
-    Log.i("SearchResults", "results: ${listSchedule.listThings}")
+//    Log.i("SearchResults", "search params: $registrationState")
+//    Log.i("SearchResults", "results: ${listSchedule.listThings}")
 
     Column(
         modifier = Modifier
@@ -51,7 +51,7 @@ fun dropClassesScreen(navController: NavController) {
     ) {
         LazyColumn {
             items(listSchedule.listThings) { schedule ->
-                ScheduleRow(
+                dropScheduleRow(
                     schedule = schedule,
                     isChecked = checkedList.value.contains(schedule),
                     onCheckedChange = { isChecked ->
@@ -80,7 +80,7 @@ fun dropClassesScreen(navController: NavController) {
 }
 
 @Composable
-fun ScheduleRow(schedule: Schedule, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+fun dropScheduleRow(schedule: Schedule, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

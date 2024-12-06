@@ -18,19 +18,22 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.group2_oasis_finalproject.RegistrationUI.ScheduleScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.SectionSearchResults
 import com.example.group2_oasis_finalproject.RegistrationUI.SelectATermScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.dropClassesScreen
 import com.example.group2_oasis_finalproject.RegistrationUI.registrationscreen
 import com.example.group2_oasis_finalproject.RegistrationUI.searchSectionsScreen
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun navBar() {
+fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
     val Context = LocalContext.current
     val navController = rememberNavController()
 
@@ -148,7 +151,7 @@ fun navBar() {
                     Screentitle = "Main Menu"
                     shownavbar = true
                     selectedItemIndex = 0
-                    mainmenuscreen(navController)
+                    mainmenuscreen(navController, viewModel)
                 }
                 composable(route = "signUpScreen") {
                     signUpScreen(navController)
@@ -173,6 +176,85 @@ fun navBar() {
                     selectedItemIndex = 4
                     financialinformationscreen(navController)
                 }
+                composable(route = "ChangePinScreen") {
+                    ChangePinScreen(navController)
+                }//End of composable
+
+
+                composable("ViewEmailScreen") { backStackEntry ->
+                    val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
+                    ViewEmailScreen(
+                        ramId = ramId,
+                        usersRepository = UsersRepository(
+                            context = LocalContext.current,
+                            firestoreDb = FirebaseFirestore.getInstance()
+                        )
+                    )
+                }
+                composable(route = "NameChangeScreen") {
+                    NameChangeScreen()
+                }//end
+
+                composable(route = "UpdateEmergencyContactsScreen") {
+                    UpdateEmergencyContactsScreen(navController)
+                }//end
+
+
+                composable("ViewEmergencyContactsScreen") {
+                    ViewEmergencyContactsScreen(
+                        emergencyContacts = listOf(
+                            EmergencyContact("John Doe", "123 Main St", "555-1234", "Friend")
+                        ),
+                        navController = navController
+                    )
+                }
+                composable(route = "UpdateMaritalStatusScreen") {
+                    UpdateMaritalStatusScreen()
+                }//end
+                composable(route = "financialAidStatusScreen") {
+                    financialAidStatusScreen(navController)
+                }//End of composable
+
+                composable(route = "ViewHoldScreen") {
+                    Screentitle = "View Hold"
+                    shownavbar = true
+                    ViewHoldScreen(navController)
+                }
+                composable(route = "FinalGradeScreen") {
+                    Screentitle = "Final Grades"
+                    shownavbar = true
+                    FinalGradeScreen(navController)
+                }
+                composable(route = "AcademicTranscriptScreen") {
+                    Screentitle = "Academic Transcripts"
+                    shownavbar = true
+                    AcademicTranscriptScreen(navController)
+                }
+                composable(route = "AccountSummaryByTermScreen") {
+                    Screentitle = "Account Summary By Term"
+                    shownavbar = true
+                    AccountSummaryByTermScreen(navController)
+                }
+                composable(route = "AccountSummaryScreen") {
+                    Screentitle = "Account Summary"
+                    shownavbar = true
+                    AccountSummaryScreen(navController)
+                }
+                composable(route = "TaxNotificationScreen") {
+                    Screentitle = "Tax Notification"
+                    shownavbar = true
+                    TaxNotificationScreen(navController)
+                }
+                composable(route = "ViewStudentInformationScreen") {
+                    Screentitle = "View Student Information"
+                    shownavbar = true
+                    ViewStudentInformationScreen(navController)
+                }
+                composable(route = "OrderOfficialTranscriptScreen") {
+                    Screentitle = "Order Official Transcript"
+                    shownavbar = true
+                    OrderOfficialTranscriptScreen(navController)
+                }
                 composable(route = "SelectATermScreen") {
                     Screentitle = "Select a Term"
                     selectedItemIndex = 4
@@ -192,6 +274,11 @@ fun navBar() {
                     Screentitle = "Drop Classes"
                     selectedItemIndex = 4
                     dropClassesScreen(navController)
+                }
+                composable(route = "ScheduleScreen") {
+                    Screentitle = "Schedule"
+                    selectedItemIndex = 4
+                    ScheduleScreen(navController)
                 }
             }
         }

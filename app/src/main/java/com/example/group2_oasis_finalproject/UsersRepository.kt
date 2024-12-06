@@ -21,7 +21,9 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     private val userDao = database.userDao()
 
-    fun getUser(RamID : String) = userDao.getUser(RamID)
+    fun getUser(ramId: String): Flow<User?> {
+        return userDao.getUser(ramId)  // Make sure the DAO returns the correct Flow<User?>
+    }
 
     fun getUsers() = userDao.getUsers()
 
@@ -33,7 +35,7 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     fun deleteSubject(user: User) { userDao.deleteSubject(user) }
 
-    fun getAllUsers() : Flow<List<User>> {
+    fun getAllUsersFB() : Flow<List<User>> {
         val queryFlow : Flow<List<User>> = firestoreDb.collection("OasisUsers").dataObjects<User>()
         return queryFlow
     }

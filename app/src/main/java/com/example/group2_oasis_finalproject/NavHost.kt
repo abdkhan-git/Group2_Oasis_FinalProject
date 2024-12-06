@@ -1,6 +1,7 @@
 package com.example.group2_oasis_finalproject
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,7 +19,7 @@ fun navHost() {
             signUpScreen(navController)
         }//End of composable
         composable(route = "MainMenuScreen") {
-            mainmenuscreen(navController)
+            mainmenuscreen(navController, viewModel())
         }//End of composable
         composable(route = "RegistrationScreen") {
             registrationscreen(navController)
@@ -29,8 +30,12 @@ fun navHost() {
         composable(route = "PersonalInformationScreen") {
             personalinformationscreen(navController)
         }//End of composable
+        composable(route = "ChangePinScreen") {
+            ChangePinScreen(navController)
+        }//End of composable
+
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)
-        }//End of composable
+        }
     }//End of Navhost
 }

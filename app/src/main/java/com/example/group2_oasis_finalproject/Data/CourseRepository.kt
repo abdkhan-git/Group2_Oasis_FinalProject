@@ -3,18 +3,6 @@ package com.example.group2_oasis_finalproject.Data
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
-//    fun getCourse(subject: String, number: String): Flow<Course?>
-//
-//    fun getCourseByCredits(credits: String): Flow<List<Course?>>
-//
-//    fun getCourseByTitle(partialTitle: String): Flow<List<Course?>>
-//
-//    suspend fun addCourse(course : Course)
-//
-//    suspend fun updateCourse(course : Course)
-//
-//    suspend fun deleteCourse(course : Course)
-//
 fun searchSections(
     crn: String?,
     courseSubject: String?,
@@ -37,7 +25,8 @@ fun searchSections(
     suspend fun addSchedule(schedule: Schedule)
     suspend fun deleteSchedule(schedule: Schedule)
     fun getUsersSchedule(RamID: String): Flow<List<Schedule>>
-
+//    fun getUsersScheduleData(crn: String): Flow<List<Schedule>>
+    fun getSectionsForUser(ramID: String): Flow<List<SectionWithSchedule>>
 
     suspend fun addSection(section : Section)
 

@@ -44,6 +44,9 @@ class OfflineCourseRepository(private val courseDao: CourseDao) : CourseReposito
     }
 
 
+    override fun getSectionsForUser(ramID: String): Flow<List<SectionWithSchedule>> {
+        return courseDao.getSectionsForUser(ramID)
+    }
 
     override suspend fun addSchedule(schedule: Schedule) {
         return courseDao.addSchedule(schedule)
