@@ -138,7 +138,12 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                 MenuSection(
                     title = "Parking Decals & Traffic Violations",
                     description = "Purchase campus parking decals, pay parking citations",
-                    onClick = { /* Handle click */ }
+                    onClick = {
+                        val webpage =
+                            Uri.parse("https://farmingdale.t2hosted.com/Account/Portal")
+                        val intent = Intent(Intent.ACTION_VIEW, webpage)
+                        context.startActivity(intent)
+                    }
                 )
             }
         }
