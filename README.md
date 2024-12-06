@@ -1,4 +1,5 @@
 # Farmingdale State College - Mobile OASIS Application
+![fsc-logo-rgb](https://github.com/user-attachments/assets/f7007884-82a5-40c4-b42c-611637d538a9)
 
 ## Overview
 The Farmingdale State College Mobile OASIS Application is a mobile-friendly platform that provides students access to critical academic, financial, and personal information. This application streamlines the functionality of the web-based OASIS system into a user-friendly interface optimized for mobile devices.
@@ -75,7 +76,19 @@ The Farmingdale State College Mobile OASIS Application is a mobile-friendly plat
 
 ---
 
+## Documentation
+- [Group 2 - Oasis Clone Report.pdf](https://github.com/user-attachments/files/18034445/Group.2.-.Oasis.Clone.Report.pdf)
+- [Group 2 - Project Proposal (Oasis) .pdf](https://github.com/user-attachments/files/18034447/Group.2.-.Project.Proposal.Oasis.pdf)
+- [Farmingdale_Oasis_Presentation.pdf](https://github.com/user-attachments/files/18034449/Farmingdale_Oasis_Presentation.pdf)
+- ![HiFi_version](https://github.com/user-attachments/assets/057f2c5f-58ee-49f2-a353-5a85ae004f23)
+- ![HiFi_version_darkmode](https://github.com/user-attachments/assets/2332a26a-07f6-4a27-afdb-a9ee721e7219)
+
+
+---
+
 ## Disclaimer
 This application is intended for Farmingdale State College students only. Unauthorized use may result in disciplinary action as per college policies.
 
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bed56edf-d82f-45c4-8775-00be66b3f4ce" alt="FSC Logo" width="300">
+</p>
