@@ -22,6 +22,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.group2_oasis_finalproject.RegistrationUI.ScheduleScreen
+import com.example.group2_oasis_finalproject.RegistrationUI.SectionSearchResults
+import com.example.group2_oasis_finalproject.RegistrationUI.dropClassesScreen
+import com.example.group2_oasis_finalproject.RegistrationUI.registrationscreen
+import com.example.group2_oasis_finalproject.RegistrationUI.searchSectionsScreen
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -145,7 +150,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     Screentitle = "Main Menu"
                     shownavbar = true
                     selectedItemIndex = 0
-                    mainmenuscreen(navController = navController, viewModel = viewModel)
+                    mainmenuscreen(navController, viewModel)
                 }
                 composable(route = "signUpScreen") {
                     signUpScreen(navController)
@@ -249,10 +254,27 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     shownavbar = true
                     OrderOfficialTranscriptScreen(navController)
                 }
-
-
+                composable(route = "searchSectionsScreen") {
+                    Screentitle = "Section Search"
+                    selectedItemIndex = 4
+                    searchSectionsScreen(navController)
+                }
+                composable(route = "SectionSearchResults") {
+                    Screentitle = "Sections"
+                    selectedItemIndex = 4
+                    SectionSearchResults(navController)
+                }
+                composable(route = "DropClassesScreen") {
+                    Screentitle = "Drop Classes"
+                    selectedItemIndex = 4
+                    dropClassesScreen(navController)
+                }
+                composable(route = "ScheduleScreen") {
+                    Screentitle = "Schedule"
+                    selectedItemIndex = 4
+                    ScheduleScreen(navController)
+                }
             }
         }
     }
 }
-

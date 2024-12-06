@@ -75,5 +75,6 @@ fun financialinformationscreen(navController: NavController) {
                     Alignment.CenterVertically))
             }
         }
-        }}
+        }
+    }
 }

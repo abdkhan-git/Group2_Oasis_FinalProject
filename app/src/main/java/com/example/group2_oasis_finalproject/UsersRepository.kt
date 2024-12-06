@@ -16,7 +16,9 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
     private val databaseCallback = object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) { super.onCreate(db) }
         }
-    private val database: UserDatabase = Room.databaseBuilder(context, UserDatabase::class.java, "study.db").addCallback(databaseCallback).build()
+//    private val database: UserDatabase = Room.databaseBuilder(context, UserDatabase::class.java, "study.db").addCallback(databaseCallback).build()
+    private val database: UserDatabase = UserDatabase.getDatabase(context)
+
     private val userDao = database.userDao()
 
     fun getUser(ramId: String): Flow<User?> {

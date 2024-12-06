@@ -1,4 +1,3 @@
-// mainmenuscreen.kt
 package com.example.group2_oasis_finalproject
 
 import android.content.Intent
@@ -14,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,58 +21,36 @@ import java.util.*
 @Composable
 fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewModel) {
     val context = LocalContext.current
+    val viewModel: MainMenuScreenViewModel = viewModel()
     val currentUser by viewModel.currentUser.collectAsState()
     val isDarkModeEnabled by viewModel.isDarkModeEnabled.collectAsState()
     val currentTime = remember {
         SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.US).format(Date())
     }
+    GlobalData.currentUser = currentUser
 
-    // Wrap the entire screen with MaterialTheme
-    MaterialTheme(
-        colorScheme = if (isDarkModeEnabled) darkColorScheme() else lightColorScheme()
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            // Toggle for Dark Mode
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+        // Welcome Header
+        item {
+            Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                currentUser?.let {
                     Text(
-                        text = "Enable Dark Mode",
-                        style = MaterialTheme.typography.titleMedium,
+                        text = "Welcome, ${it.First} ${it.Last}",
+                        style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold
                     )
-                    Switch(
-                        checked = isDarkModeEnabled,
-                        onCheckedChange = { viewModel.toggleTheme() }
-                    )
                 }
+                Text(
+                    text = "Last access on $currentTime",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray
+                )
             }
-
-            // Welcome Header
-            item {
-                Column(modifier = Modifier.padding(bottom = 16.dp)) {
-                    currentUser?.let {
-                        Text(
-                            text = "Welcome, ${it.First} ${it.Last}",
-                            style = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                        Text(
-                            text = "Last access on $currentTime",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
-                    }
-                }
+        }
 
             // Graduation Section
             item {
@@ -161,7 +139,7 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
             }
         } // Close LazyColumn
     } // Close MaterialTheme
-}
+//}
 
 
 @Composable
