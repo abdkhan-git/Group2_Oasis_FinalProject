@@ -31,9 +31,8 @@ fun navHost() {
             personalinformationscreen(navController)
         }//End of composable
         composable(route = "ChangePinScreen") {
-            ChangePinScreen(navController)
+//            ChangePinScreen(navController)
         }//End of composable
-
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)
         }

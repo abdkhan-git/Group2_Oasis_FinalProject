@@ -1,3 +1,4 @@
+// mainmenuscreen.kt
 package com.example.group2_oasis_finalproject
 
 import android.content.Intent
@@ -13,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,36 +21,39 @@ import java.util.*
 @Composable
 fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewModel) {
     val context = LocalContext.current
-    val viewModel: MainMenuScreenViewModel = viewModel()
     val currentUser by viewModel.currentUser.collectAsState()
     val isDarkModeEnabled by viewModel.isDarkModeEnabled.collectAsState()
     val currentTime = remember {
         SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.US).format(Date())
     }
-    GlobalData.currentUser = currentUser
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+    // Wrap the entire screen with MaterialTheme
+    MaterialTheme(
+        colorScheme = if (isDarkModeEnabled) darkColorScheme() else lightColorScheme()
     ) {
-        // Welcome Header
-        item {
-            Column(modifier = Modifier.padding(bottom = 16.dp)) {
-                currentUser?.let {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+
+            // Welcome Header
+            item {
+                Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                    currentUser?.let {
+                        Text(
+                            text = "Welcome, ${it.First} ${it.Last}",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                     Text(
-                        text = "Welcome, ${it.First} ${it.Last}",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
+                        text = "Last access on $currentTime",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Gray
                     )
                 }
-                Text(
-                    text = "Last access on $currentTime",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
-                )
             }
-        }
 
             // Graduation Section
             item {
@@ -99,7 +102,8 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     title = "Pay Your Bill",
                     description = "Access the Student Account Payment/Billing Center, to view your bill and pay online using MasterCard, Visa, Discover or Amex.",
                     onClick = {
-                        val webpage = Uri.parse("https://epay.farmingdale.edu/C21458_tsa/web/login.jsp")
+                        val webpage =
+                            Uri.parse("https://epay.farmingdale.edu/C21458_tsa/web/login.jsp")
                         val intent = Intent(Intent.ACTION_VIEW, webpage)
                         context.startActivity(intent)
                     }
@@ -137,10 +141,9 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                     onClick = { /* Handle click */ }
                 )
             }
-        } // Close LazyColumn
-    } // Close MaterialTheme
-//}
-
+        }
+    }
+}
 
 @Composable
 private fun MenuSection(

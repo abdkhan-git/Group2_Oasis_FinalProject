@@ -171,4 +171,3 @@ fun UpdateMaritalStatusScreen() {
         )
     }
 }
-

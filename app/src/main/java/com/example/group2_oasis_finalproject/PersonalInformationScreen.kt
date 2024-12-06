@@ -1,6 +1,5 @@
 package com.example.group2_oasis_finalproject
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,21 +12,15 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
 fun personalinformationscreen(navController: NavController) {
-
-
 
     LazyColumn {
 
@@ -101,7 +94,7 @@ fun personalinformationscreen(navController: NavController) {
                 }
             }
         }
-            } //end of Update Emergency Contacts
+        } //end of Update Emergency Contacts
 
 
         //Material Status
@@ -120,7 +113,7 @@ fun personalinformationscreen(navController: NavController) {
 
         //Social Security Number Info
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("SocialSecurityScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
@@ -131,14 +124,14 @@ fun personalinformationscreen(navController: NavController) {
         }
         } //end of Social Security Number Info
 
-        //Veteran Classifications
+        //Emergency Alert
         item { ElevatedCard(elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,),
-            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("RegistrationScreen") })
+            modifier = Modifier.fillMaxWidth().padding(10.dp).fillMaxSize(), onClick = { navController.navigate("EmergencyAlertScreen") })
         {
             Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(Modifier.padding(top = 10.dp, bottom = 20.dp)) {
-                    Text(text = "Veterans Classifications", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
-                    Text(text = "View and/or Update your Veteran Status", lineHeight = TextUnit(1.5f, TextUnitType.Em))
+                    Text(text = "Emergency Alert", lineHeight = TextUnit(2f, TextUnitType.Em), fontWeight = FontWeight.Bold)
+                    Text(text = "Register your personal contact information to receive E-Mail, Voice and Text Messaging Alerts during Campus Emergencies", lineHeight = TextUnit(1.5f, TextUnitType.Em))
                 }
             }
         }

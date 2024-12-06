@@ -1,47 +1,57 @@
 package com.example.group2_oasis_finalproject
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-
-// Data class for structured emergency contact information
-//data class EmergencyContact(
-//    val name: String,
-//    val address: String,
-//    val phone: String,
-//    val relationship: String
-//)
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 
 @Composable
-fun ViewEmergencyContactsScreen(
-    emergencyContacts: List<EmergencyContact>,
-    navController: NavHostController // Pass NavController for navigation
-) {
+fun ViewEmergencyContactsScreen(navController: NavController, viewModel: EmergencyContactViewModel = viewModel()) {
+
+    val contactList = viewModel.contactList
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+
+        // Image
+        Image(
+            painter = painterResource(id = R.drawable.fsclogorgb),
+            contentDescription = "Logo",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+        )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
         // Emergency Contacts Header
         Text(
-            text = "Emergency Contacts",
+            text = if (contactList.isNotEmpty()) {
+                "View Emergency Contacts"
+            } else {
+                "Caution: No Emergency Contact Information found."
+            },
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
         // Display Contacts or No Contacts Message
-        if (emergencyContacts.isNotEmpty()) {
+        if (contactList.isNotEmpty()) {
             Column {
-                emergencyContacts.forEach { contact ->
+                contactList.forEach { contact ->
                     Text(
                         text = "Name: ${contact.name}\n" +
                                 "Address: ${contact.address}\n" +
@@ -63,13 +73,24 @@ fun ViewEmergencyContactsScreen(
         }
 
         // Update Emergency Contacts Button
-        Button(
-            onClick = { navController.navigate("UpdateEmergencyContactsScreen") }, // Navigate to Update Contacts screen
+        OutlinedButton(
+            onClick = { navController.navigate("UpdateEmergencyContactsScreen") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
             Text(text = "Update Emergency Contacts")
         }
+
+        // Footer with Release Information
+        Spacer(modifier = Modifier.weight(1f)) // Push footer to the bottom
+        Text(
+            text = "Release: 8.7\n\n© 2024 Ellucian Company L.P. and its affiliates.",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
     }
+
+
 }

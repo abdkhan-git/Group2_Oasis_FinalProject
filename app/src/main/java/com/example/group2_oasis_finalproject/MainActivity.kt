@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-           // navBar()
+            // navBar()
             // Get the ViewModel
             val viewModel: MainMenuScreenViewModel = viewModel()
             // Listen to the dark mode state
