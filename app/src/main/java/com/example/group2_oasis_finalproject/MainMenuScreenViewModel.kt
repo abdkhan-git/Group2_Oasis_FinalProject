@@ -31,4 +31,14 @@ class MainMenuScreenViewModel(
             }
         }
     }
+    fun checkOldPin(oldPin: String): Boolean {
+
+        return oldPin == "123456" // dummy code
+    }
+
+    // Mock function for update  PIN
+    fun updatePin(newPin: String): Boolean {
+
+        return true // Assuming the update is successful
+    }
 }

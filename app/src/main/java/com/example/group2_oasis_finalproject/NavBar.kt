@@ -1,5 +1,6 @@
 package com.example.group2_oasis_finalproject
 
+import com.example.group2_oasis_finalproject.ViewEmergencyContactsScreen
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -196,10 +197,13 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     financialinformationscreen(navController)
                 }
                 composable(route = "ChangePinScreen") {
-                    ChangePinScreen(navController)
-                }//End of composable
+                    val viewModel: MainMenuScreenViewModel = viewModel // Get the viewModel here
+                    ChangePinScreen(
+                        navController,
+                        viewModel
+                    )  // Pass the viewModel to the screen//End of composable
 
-
+                }
                 composable("ViewEmailScreen") { backStackEntry ->
                     val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
                     ViewEmailScreen(
@@ -214,19 +218,14 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     NameChangeScreen()
                 }//end
 
-                composable(route = "UpdateEmergencyContactsScreen") {
-                    UpdateEmergencyContactsScreen(navController)
-                }//end
-
-
-                composable("ViewEmergencyContactsScreen") {
-                    ViewEmergencyContactsScreen(
-                        emergencyContacts = listOf(
-                            EmergencyContact("Jack Hanma", "123 Main St", "555-1234", "Bully")
-                        ),
-                        navController = navController
-                    )
+                composable("UpdateEmergencyContactsScreen") {
+                    UpdateEmergencyContactsScreen(navController = navController)
                 }
+                composable("ViewEmergencyContactsScreen") {
+                    ViewEmergencyContactsScreen(navController = navController)
+                }
+
+
                 composable(route = "UpdateMaritalStatusScreen") {
                     UpdateMaritalStatusScreen()
                 }//end

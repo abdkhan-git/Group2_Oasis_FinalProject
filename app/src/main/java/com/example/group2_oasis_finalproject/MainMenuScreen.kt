@@ -36,25 +36,24 @@ fun mainmenuscreen(navController: NavController, viewModel: MainMenuScreenViewMo
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-//            // Toggle for Dark Mode
-//            item {
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(8.dp),
-//                    horizontalArrangement = Arrangement.SpaceBetween
-//                ) {
-//                    Text(
-//                        text = "Enable Dark Mode",
-//                        style = MaterialTheme.typography.titleMedium,
-//                        fontWeight = FontWeight.Bold
-//                    )
-//                    Switch(
-//                        checked = isDarkModeEnabled,
-//                        onCheckedChange = { viewModel.toggleTheme() },
-//                    )
-//                }
-//            }
+
+            // Welcome Header
+            item {
+                Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                    currentUser?.let {
+                        Text(
+                            text = "Welcome, ${it.First} ${it.Last}",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        text = "Last access on $currentTime",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Gray
+                    )
+                }
+            }
 
             // Graduation Section
             item {

@@ -2,10 +2,7 @@ package com.example.group2_oasis_finalproject
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,21 +10,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-
-// Data class for structured emergency contact information
-//data class EmergencyContact(
-//    val name: String,
-//    val address: String,
-//    val phone: String,
-//    val relationship: String
-//)
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 
 @Composable
-fun ViewEmergencyContactsScreen(
-    emergencyContacts: List<EmergencyContact>,
-    navController: NavHostController // Pass NavController for navigation
-) {
+fun ViewEmergencyContactsScreen(navController: NavController, viewModel: EmergencyContactViewModel = viewModel()) {
+
+    val contactList = viewModel.contactList
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +28,7 @@ fun ViewEmergencyContactsScreen(
         // Image
         Image(
             painter = painterResource(id = R.drawable.fsclogorgb),
-            contentDescription = "Transparent Image",
+            contentDescription = "Logo",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp)
@@ -48,7 +38,7 @@ fun ViewEmergencyContactsScreen(
 
         // Emergency Contacts Header
         Text(
-            text = if (emergencyContacts.isNotEmpty()) {
+            text = if (contactList.isNotEmpty()) {
                 "View Emergency Contacts"
             } else {
                 "Caution: No Emergency Contact Information found."
@@ -59,9 +49,9 @@ fun ViewEmergencyContactsScreen(
         )
 
         // Display Contacts or No Contacts Message
-        if (emergencyContacts.isNotEmpty()) {
+        if (contactList.isNotEmpty()) {
             Column {
-                emergencyContacts.forEach { contact ->
+                contactList.forEach { contact ->
                     Text(
                         text = "Name: ${contact.name}\n" +
                                 "Address: ${contact.address}\n" +
@@ -84,7 +74,7 @@ fun ViewEmergencyContactsScreen(
 
         // Update Emergency Contacts Button
         OutlinedButton(
-            onClick = { navController.navigate("UpdateEmergencyContactsScreen") }, // Navigate to Update Contacts screen
+            onClick = { navController.navigate("UpdateEmergencyContactsScreen") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
@@ -101,5 +91,8 @@ fun ViewEmergencyContactsScreen(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
+
+
 }
+
 

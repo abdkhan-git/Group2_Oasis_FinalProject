@@ -1,5 +1,6 @@
 package com.example.group2_oasis_finalproject
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,6 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,12 +20,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.group2_oasis_finalproject.ui.theme.FarmingdaleGreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
-fun ChangePinScreen(navController: NavController) {
+fun ChangePinScreen(navController: NavController, viewModel: MainMenuScreenViewModel) {
     var oldPin by rememberSaveable { mutableStateOf("") }
     var newPin by rememberSaveable { mutableStateOf("") }
     var reenterNewPin by rememberSaveable { mutableStateOf("") }
+    var userRamId by rememberSaveable { mutableStateOf("") }
+    var userPin by rememberSaveable { mutableStateOf("") }
+    var showMessage by remember { mutableStateOf("") }
+    var pinChangeStatus by remember { mutableStateOf("") } // Added pinChangeStatus state for messages
+
+    // Handle the change pin logic
+    val context = LocalContext.current
 
     // Wrap the entire content in a scrollable column
     Column(
@@ -106,23 +119,57 @@ fun ChangePinScreen(navController: NavController) {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Change Pin Button
-            Button(
+            OutlinedButton(
                 onClick = { navController.navigate("PersonalInformationScreen") },
-                colors = ButtonDefaults.buttonColors(containerColor = FarmingdaleGreen)
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = FarmingdaleGreen)
+
             ) {
-                Text(text = "Change Pin", color = Color.White)
+                Text(text = "Change Pin")
             }
 
-            // Reset Button
             OutlinedButton(
-                onClick = { /* Add reset functionality later */ },
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = FarmingdaleGreen)
+                onClick = {
+                    if (oldPin.isNotBlank() && newPin.isNotBlank() && reenterNewPin.isNotBlank()) {
+                        if (newPin == reenterNewPin) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val isOldPinValid = viewModel.checkOldPin(oldPin)
+                                withContext(Dispatchers.Main) {
+                                    if (isOldPinValid) {
+                                        val updateStatus = viewModel.updatePin(newPin)
+                                        pinChangeStatus = if (updateStatus) {
+                                            "PIN changed successfully"
+                                        } else {
+                                            "Failed to change PIN"
+                                        }
+                                        Toast.makeText(context, pinChangeStatus, Toast.LENGTH_LONG)
+                                            .show()
+                                        if (updateStatus) {
+                                            navController.popBackStack() // Go back after successful PIN change
+                                        }
+                                    } else {
+                                        pinChangeStatus = "Incorrect Old PIN"
+                                        Toast.makeText(context, pinChangeStatus, Toast.LENGTH_LONG)
+                                            .show()
+                                    }
+                                }
+                            }
+                        } else {
+                            pinChangeStatus = "New PINs don't match"
+                            Toast.makeText(context, pinChangeStatus, Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        pinChangeStatus = "Please fill all fields"
+                        Toast.makeText(context, pinChangeStatus, Toast.LENGTH_LONG).show()
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = FarmingdaleGreen)
             ) {
                 Text(text = "Reset")
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+
+            Spacer(modifier = Modifier.height(20.dp))
 
         // Footer with updated version info
         Text(
