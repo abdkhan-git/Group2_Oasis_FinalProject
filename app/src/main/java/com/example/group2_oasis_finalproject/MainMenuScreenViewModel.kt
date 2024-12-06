@@ -41,4 +41,6 @@ class MainMenuScreenViewModel(
 
         return true // Assuming the update is successful
     }
+
 }
+

@@ -1,5 +1,6 @@
 package com.example.group2_oasis_finalproject
 
+import com.example.group2_oasis_finalproject.ViewEmergencyContactsScreen
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -39,6 +40,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
 
     // Observe the dark mode state from the ViewModel
     val isDarkModeEnabled by viewModel.isDarkModeEnabled.collectAsState()
+
 
 
     val navItemsList = listOf(
@@ -93,6 +95,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                                 },
                                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) }
                             )
+
                             //theme Toggle Menu Item
                             DropdownMenuItem(
                                 text = { Text(if (isDarkModeEnabled) "Disable Dark Mode" else "Enable Dark Mode") },
@@ -200,6 +203,13 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     financialinformationscreen(navController)
                 }
 
+                composable(route = "ChangePinScreen") {
+                    val viewModel: MainMenuScreenViewModel = viewModel // Get the viewModel here
+                    ChangePinScreen(
+                        navController,
+                        viewModel
+                    )  // Pass the viewModel to the screen//End of composabl
+
 
 
 
@@ -243,6 +253,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                 composable("EmergencyAlertScreen") {
                     EmergencyAlertScreen(context = LocalContext.current)
                 }
+
 
 
 
@@ -313,6 +324,7 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     selectedItemIndex = 4
                     ScheduleScreen(navController)
                 }
+
             }
         }
     }

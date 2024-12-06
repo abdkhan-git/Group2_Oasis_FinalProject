@@ -30,9 +30,11 @@ fun navHost() {
         composable(route = "PersonalInformationScreen") {
             personalinformationscreen(navController)
         }//End of composable
+
         composable(route = "ChangePinScreen") {
 //            ChangePinScreen(navController)
         }//End of composable
+
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)
         }

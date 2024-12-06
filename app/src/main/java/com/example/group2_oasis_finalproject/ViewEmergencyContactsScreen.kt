@@ -94,3 +94,5 @@ fun ViewEmergencyContactsScreen(navController: NavController, viewModel: Emergen
 
 
 }
+
+

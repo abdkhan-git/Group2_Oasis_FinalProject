@@ -2,6 +2,7 @@ package com.example.group2_oasis_finalproject
 
 
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,30 +23,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 
+
 @Composable
-fun UpdateEmergencyContactsScreen(navController: NavController) {
-    // Contact list with a state to update dynamically
-    val contactList = remember { mutableStateListOf<EmergencyContact>() }
+fun UpdateEmergencyContactsScreen(navController: NavController, viewModel: EmergencyContactViewModel = viewModel()) {
+    val contactList = viewModel.contactList
     val showAddContactDialog = remember { mutableStateOf(false) }
+
+    val updateContact: (EmergencyContact) -> Unit = { updatedContact ->
+        viewModel.updateContact(updatedContact)
+    }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Header Section
         item {
+            // Image and Header Section
             Image(
-                painter = painterResource(id = R.drawable.fsclogorgb), // Farmingdale logo
-                contentDescription = "Transparent Image",
+                painter = painterResource(id = R.drawable.fsclogorgb),
+                contentDescription = "Logo",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
             )
-
             Text(
                 text = "Update Emergency Contacts - Select Contact",
                 style = MaterialTheme.typography.headlineMedium,
@@ -54,56 +59,41 @@ fun UpdateEmergencyContactsScreen(navController: NavController) {
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Your current emergency contact information is listed below. To update a contact, click the name of the contact you wish to update. To add a new contact, click New Contact.",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            Text(
-                text = "Emergency Contacts",
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
         }
 
-        // Emergency Contacts
         items(contactList.size) { index ->
             val contact = contactList[index]
-            ContactRow(contact = contact, onClick = { /* Handle update action */ })
+            ContactRow(contact = contact, onClick = {
+                // Pass the contact to the "AddContactDialog" screen (or update screen)
+                navController.navigate("AddContactDialog?contactName=${contact.name}&contactAddress=${contact.address}&contactPhone=${contact.phone}&contactRelationship=${contact.relationship}")
+            })
         }
 
-        // Buttons
         item {
-            Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedButton(
                 onClick = { showAddContactDialog.value = true },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
             ) {
                 Text(text = "Add New Contact")
             }
+        }
 
-            // Button to navigate to ViewEmergencyContactsScreen
+        // Add ViewEmergencyContacts button below the list
+        item {
             OutlinedButton(
-                onClick = { navController.navigate("ViewEmergencyContactsScreen") },  // Navigate to view_contacts screen
-                modifier = Modifier.fillMaxWidth()
+                onClick = { navController.navigate("ViewEmergencyContactsScreen") },
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
             ) {
                 Text(text = "View Emergency Contacts")
             }
         }
     }
 
-    // Add Contact Dialog
     if (showAddContactDialog.value) {
         AddContactDialog(
             onDismiss = { showAddContactDialog.value = false },
             onAddContact = { newContact ->
-                contactList.add(newContact)
+                viewModel.addContact(newContact) // Save contact via ViewModel
                 showAddContactDialog.value = false
             }
         )
@@ -111,25 +101,45 @@ fun UpdateEmergencyContactsScreen(navController: NavController) {
 }
 
 
-
 @Composable
-fun AddContactDialog(onDismiss: () -> Unit, onAddContact: (EmergencyContact) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var address by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var relationship by remember { mutableStateOf("") }
+fun AddContactDialog(
+    onDismiss: () -> Unit,
+    onAddContact: (EmergencyContact) -> Unit,
+    contact: EmergencyContact? = null // Receive the contact to be updated (if any)
+) {
+    var name by remember { mutableStateOf(contact?.name ?: "") }
+    var address by remember { mutableStateOf(contact?.address ?: "") }
+    var phone by remember { mutableStateOf(contact?.phone ?: "") }
+    var relationship by remember { mutableStateOf(contact?.relationship ?: "") }
+    var nameError by remember { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = { onDismiss() },
-        title = { Text(text = "Add New Contact") },
+        title = { Text(text = if (contact == null) "Add New Contact" else "Update Contact") },
         text = {
             Column {
                 TextField(
                     value = name,
-                    onValueChange = { name = it },
+                    onValueChange = { newName ->
+                        // Only update if the new name contains no numbers
+                        if (newName.all { it.isLetter() || it.isWhitespace() }) {
+                            name = newName
+                            nameError = false
+                        } else {
+                            nameError = true
+                        }
+                    },
                     label = { Text("Name") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = nameError
                 )
+                if (nameError) {
+                    Text(
+                        text = "Name can only contain letters and spaces.",
+                        color = Color.Red,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
                     value = address,
@@ -155,11 +165,16 @@ fun AddContactDialog(onDismiss: () -> Unit, onAddContact: (EmergencyContact) -> 
         },
         confirmButton = {
             TextButton(onClick = {
-                if (name.isNotBlank() && address.isNotBlank() && phone.isNotBlank() && relationship.isNotBlank()) {
-                    onAddContact(EmergencyContact(name, address, phone, relationship))
+                if (name.isNotBlank() && address.isNotBlank() && phone.isNotBlank() && relationship.isNotBlank() && !nameError) {
+                    val updatedContact = EmergencyContact(name, address, phone, relationship)
+                    if (contact == null) {
+                        onAddContact(updatedContact)
+                    } else {
+                        onAddContact(updatedContact)  // This could be update logic if you already have a contact
+                    }
                 }
             }) {
-                Text(text = "Add")
+                Text(text = if (contact == null) "Add" else "Update")
             }
         },
         dismissButton = {
@@ -169,6 +184,8 @@ fun AddContactDialog(onDismiss: () -> Unit, onAddContact: (EmergencyContact) -> 
         }
     )
 }
+
+
 
 @Composable
 fun ContactRow(contact: EmergencyContact, onClick: () -> Unit) {
