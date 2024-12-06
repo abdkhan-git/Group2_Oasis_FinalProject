@@ -208,17 +208,9 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     ChangePinScreen(
                         navController,
                         viewModel
-                    )  // Pass the viewModel to the screen//End of composabl
+                    )
+                }
 
-
-                    composable(route = "ChangePinScreen") {
-                        val viewModel: MainMenuScreenViewModel = viewModel // Get the viewModel here
-                        ChangePinScreen(
-                            navController,
-                            viewModel
-                        )  // Pass the viewModel to the screen//End of composable
-
-                    }
                     composable("ViewEmailScreen") { backStackEntry ->
                         val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
                         ViewEmailScreen(
@@ -317,8 +309,6 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                         selectedItemIndex = 4
                         ScheduleScreen(navController)
                     }
-
-                }
             }
         }
     }

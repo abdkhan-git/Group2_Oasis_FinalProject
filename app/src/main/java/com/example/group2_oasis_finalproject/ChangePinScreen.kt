@@ -181,8 +181,6 @@ fun ChangePinScreen(navController: NavController, viewModel: MainMenuScreenViewM
             modifier = Modifier.padding(top = 17.dp)
         )
     }
-
 }
 
-}
 
