@@ -211,120 +211,114 @@ fun navBar(navController: NavController, viewModel: MainMenuScreenViewModel) {
                     )  // Pass the viewModel to the screen//End of composabl
 
 
+                    composable(route = "ChangePinScreen") {
+                        val viewModel: MainMenuScreenViewModel = viewModel // Get the viewModel here
+                        ChangePinScreen(
+                            navController,
+                            viewModel
+                        )  // Pass the viewModel to the screen//End of composable
 
-
-                composable(route = "ChangePinScreen") {
-                    val viewModel: MainMenuScreenViewModel = viewModel // Get the viewModel here
-                    ChangePinScreen(
-                        navController,
-                        viewModel
-                    )  // Pass the viewModel to the screen//End of composable
-
-                }
-                composable("ViewEmailScreen") { backStackEntry ->
-                    val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
-                    ViewEmailScreen(
-                        ramId = ramId,
-                        usersRepository = UsersRepository(
-                            context = LocalContext.current,
-                            firestoreDb = FirebaseFirestore.getInstance()
+                    }
+                    composable("ViewEmailScreen") { backStackEntry ->
+                        val ramId = backStackEntry.arguments?.getString("ramId") ?: ""
+                        ViewEmailScreen(
+                            ramId = ramId,
+                            usersRepository = UsersRepository(
+                                context = LocalContext.current,
+                                firestoreDb = FirebaseFirestore.getInstance()
+                            )
                         )
-                    )
-                }
-                composable(route = "NameChangeScreen") {
-                    NameChangeScreen()
-                }//end
+                    }
+                    composable(route = "NameChangeScreen") {
+                        NameChangeScreen()
+                    }//end
 
-                composable("UpdateEmergencyContactsScreen") {
-                    UpdateEmergencyContactsScreen(navController = navController)
-                }
-                composable("ViewEmergencyContactsScreen") {
-                    ViewEmergencyContactsScreen(navController = navController)
-                }
-
-
-                composable(route = "UpdateMaritalStatusScreen") {
-                    UpdateMaritalStatusScreen()
-                }//end
-
-                composable("SocialSecurityScreen") {
-                    SocialSecurityScreen(context = LocalContext.current)
-                }
-                composable("EmergencyAlertScreen") {
-                    EmergencyAlertScreen(context = LocalContext.current)
-                }
+                    composable("UpdateEmergencyContactsScreen") {
+                        UpdateEmergencyContactsScreen(navController = navController)
+                    }
+                    composable("ViewEmergencyContactsScreen") {
+                        ViewEmergencyContactsScreen(navController = navController)
+                    }
 
 
+                    composable(route = "UpdateMaritalStatusScreen") {
+                        UpdateMaritalStatusScreen()
+                    }//end
+
+                    composable("SocialSecurityScreen") {
+                        SocialSecurityScreen(context = LocalContext.current)
+                    }
+                    composable("EmergencyAlertScreen") {
+                        EmergencyAlertScreen(context = LocalContext.current)
+                    }
 
 
+                    composable(route = "financialAidStatusScreen") {
+                        financialAidStatusScreen(navController)
+                    }//End of composable
 
+                    composable(route = "ViewHoldScreen") {
+                        Screentitle = "View Hold"
+                        shownavbar = true
+                        ViewHoldScreen(navController)
+                    }
+                    composable(route = "FinalGradeScreen") {
+                        Screentitle = "Final Grades"
+                        shownavbar = true
+                        FinalGradeScreen(navController)
+                    }
+                    composable(route = "AcademicTranscriptScreen") {
+                        Screentitle = "Academic Transcripts"
+                        shownavbar = true
+                        AcademicTranscriptScreen(navController)
+                    }
+                    composable(route = "AccountSummaryByTermScreen") {
+                        Screentitle = "Account Summary By Term"
+                        shownavbar = true
+                        AccountSummaryByTermScreen(navController)
+                    }
+                    composable(route = "AccountSummaryScreen") {
+                        Screentitle = "Account Summary"
+                        shownavbar = true
+                        AccountSummaryScreen(navController)
+                    }
+                    composable(route = "TaxNotificationScreen") {
+                        Screentitle = "Tax Notification"
+                        shownavbar = true
+                        TaxNotificationScreen(navController)
+                    }
+                    composable(route = "ViewStudentInformationScreen") {
+                        Screentitle = "View Student Information"
+                        shownavbar = true
+                        ViewStudentInformationScreen(navController)
+                    }
+                    composable(route = "OrderOfficialTranscriptScreen") {
+                        Screentitle = "Order Official Transcript"
+                        shownavbar = true
+                        OrderOfficialTranscriptScreen(navController)
+                    }
+                    composable(route = "searchSectionsScreen") {
+                        Screentitle = "Section Search"
+                        selectedItemIndex = 4
+                        searchSectionsScreen(navController)
+                    }
+                    composable(route = "SectionSearchResults") {
+                        Screentitle = "Sections"
+                        selectedItemIndex = 4
+                        SectionSearchResults(navController)
+                    }
+                    composable(route = "DropClassesScreen") {
+                        Screentitle = "Drop Classes"
+                        selectedItemIndex = 4
+                        dropClassesScreen(navController)
+                    }
+                    composable(route = "ScheduleScreen") {
+                        Screentitle = "Schedule"
+                        selectedItemIndex = 4
+                        ScheduleScreen(navController)
+                    }
 
-
-                composable(route = "financialAidStatusScreen") {
-                    financialAidStatusScreen(navController)
-                }//End of composable
-
-                composable(route = "ViewHoldScreen") {
-                    Screentitle = "View Hold"
-                    shownavbar = true
-                    ViewHoldScreen(navController)
                 }
-                composable(route = "FinalGradeScreen") {
-                    Screentitle = "Final Grades"
-                    shownavbar = true
-                    FinalGradeScreen(navController)
-                }
-                composable(route = "AcademicTranscriptScreen") {
-                    Screentitle = "Academic Transcripts"
-                    shownavbar = true
-                    AcademicTranscriptScreen(navController)
-                }
-                composable(route = "AccountSummaryByTermScreen") {
-                    Screentitle = "Account Summary By Term"
-                    shownavbar = true
-                    AccountSummaryByTermScreen(navController)
-                }
-                composable(route = "AccountSummaryScreen") {
-                    Screentitle = "Account Summary"
-                    shownavbar = true
-                    AccountSummaryScreen(navController)
-                }
-                composable(route = "TaxNotificationScreen") {
-                    Screentitle = "Tax Notification"
-                    shownavbar = true
-                    TaxNotificationScreen(navController)
-                }
-                composable(route = "ViewStudentInformationScreen") {
-                    Screentitle = "View Student Information"
-                    shownavbar = true
-                    ViewStudentInformationScreen(navController)
-                }
-                composable(route = "OrderOfficialTranscriptScreen") {
-                    Screentitle = "Order Official Transcript"
-                    shownavbar = true
-                    OrderOfficialTranscriptScreen(navController)
-                }
-                composable(route = "searchSectionsScreen") {
-                    Screentitle = "Section Search"
-                    selectedItemIndex = 4
-                    searchSectionsScreen(navController)
-                }
-                composable(route = "SectionSearchResults") {
-                    Screentitle = "Sections"
-                    selectedItemIndex = 4
-                    SectionSearchResults(navController)
-                }
-                composable(route = "DropClassesScreen") {
-                    Screentitle = "Drop Classes"
-                    selectedItemIndex = 4
-                    dropClassesScreen(navController)
-                }
-                composable(route = "ScheduleScreen") {
-                    Screentitle = "Schedule"
-                    selectedItemIndex = 4
-                    ScheduleScreen(navController)
-                }
-
             }
         }
     }
