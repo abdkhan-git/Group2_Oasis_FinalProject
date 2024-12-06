@@ -25,4 +25,5 @@ class EmergencyContactViewModel : ViewModel() {
     fun deleteContact(contact: EmergencyContact) {
         contactList.remove(contact)
     }
+
 }

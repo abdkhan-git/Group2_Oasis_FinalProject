@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
@@ -33,6 +35,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,11 +58,14 @@ fun signinscreen(navController: NavController) {
     val Context = LocalContext.current
     var PassedInspection : Boolean = false
     var CoroutineScopeRunning = false
+    val scrollState = rememberScrollState()
+    val isVertical = true
 
     Column(
         Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(scrollState),
         Arrangement.Bottom,
         Alignment.CenterHorizontally
     ) {
@@ -71,7 +78,7 @@ fun signinscreen(navController: NavController) {
                 contentDescription = "SignIn Image",
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth(1f)
+                    .fillMaxWidth(if (isVertical) 0.8f else 1f)
             )
 
             Spacer(Modifier.padding(top = 30.dp))
@@ -109,7 +116,7 @@ fun signinscreen(navController: NavController) {
             Alignment.CenterHorizontally
         ) {
             OutlinedTextField(value = UserRamIDtext, onValueChange = {UserRamIDtext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Ram ID")}, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+            OutlinedTextField(value = UserPintext, onValueChange = {UserPintext = it.replace("\\s".toRegex(), "")}, label = {Text(text = "Six-Digit Login PIN")}, modifier = Modifier.fillMaxWidth(), visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 
             Row {
                 OutlinedButton(

@@ -169,7 +169,9 @@ fun ChangePinScreen(navController: NavController, viewModel: MainMenuScreenViewM
         }
 
 
+
             Spacer(modifier = Modifier.height(20.dp))
+
 
         // Footer with updated version info
         Text(
@@ -179,4 +181,8 @@ fun ChangePinScreen(navController: NavController, viewModel: MainMenuScreenViewM
             modifier = Modifier.padding(top = 17.dp)
         )
     }
+
 }
+
+}
+

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
+import com.example.group2_oasis_finalproject.RegistrationUI.registrationscreen
 
 
 @Composable
@@ -30,9 +30,10 @@ fun navHost() {
         composable(route = "PersonalInformationScreen") {
             personalinformationscreen(navController)
         }//End of composable
-//        composable(route = "ChangePinScreen") {
+
+        composable(route = "ChangePinScreen") {
 //            ChangePinScreen(navController)
-//        }//End of composable
+        }//End of composable
 
         composable(route = "FinancialInformationScreen") {
             financialinformationscreen(navController)

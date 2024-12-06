@@ -94,7 +94,7 @@ fun personalinformationscreen(navController: NavController) {
                 }
             }
         }
-            } //end of Update Emergency Contacts
+        } //end of Update Emergency Contacts
 
 
         //Material Status

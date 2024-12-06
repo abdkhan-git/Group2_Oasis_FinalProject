@@ -16,7 +16,9 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
     private val databaseCallback = object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) { super.onCreate(db) }
         }
-    private val database: UserDatabase = Room.databaseBuilder(context, UserDatabase::class.java, "study.db").addCallback(databaseCallback).build()
+//    private val database: UserDatabase = Room.databaseBuilder(context, UserDatabase::class.java, "study.db").addCallback(databaseCallback).build()
+    private val database: UserDatabase = UserDatabase.getDatabase(context)
+
     private val userDao = database.userDao()
 
     fun getUser(ramId: String): Flow<User?> {
@@ -33,7 +35,7 @@ class UsersRepository (context: Context, var firestoreDb : FirebaseFirestore) {
 
     fun deleteSubject(user: User) { userDao.deleteSubject(user) }
 
-    fun getAllUsers() : Flow<List<User>> {
+    fun getAllUsersFB() : Flow<List<User>> {
         val queryFlow : Flow<List<User>> = firestoreDb.collection("OasisUsers").dataObjects<User>()
         return queryFlow
     }
